@@ -1,16 +1,23 @@
-<?php namespace Package\Domain\Entity;
+<?php declare(strict_types=1);
 
-use Package\BaseEntity;
-use Carbon\Carbon;
+namespace Package\Domain\Entity;
 
-class Clan extends BaseEntity {
-    protected int $id;
-    protected string $name;
-    protected Carbon $createdAt;
-    protected Carbon $updatedAt;
+use Package\Domain\ValueObject\Datetime;
+use Package\Domain\BaseEntity as Entity;
 
-    public function __construct(array $vars) {
-        parent::__construct($vars);
+class Clan extends Entity {
+    public function __construct(
+        private int $id,
+        private string $name,
+        private Datetime $createdAt,
+        private Datetime $updatedAt
+    ) {
+        if ($id === 0) {
+            throw new \InvalidArgumentException("clanIDの値が不正です。");
+        }
+        if (empty($name)) {
+            throw new \InvalidArgumentException("clan名が正しく設定されていません。");
+        }
     }
 
     public function id(): int
@@ -23,12 +30,12 @@ class Clan extends BaseEntity {
         return $this->name;
     }
 
-    public function createdAt(): Carbon
+    public function createdAt(): Datetime
     {
         return $this->createdAt;
     }
 
-    public function updatedAt(): Carbon
+    public function updatedAt(): Datetime
     {
         return $this->updatedAt;
     }
