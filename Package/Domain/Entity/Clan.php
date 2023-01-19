@@ -2,30 +2,25 @@
 
 namespace Package\Domain\Entity;
 
+use Package\Domain\ValueObject\Clan\ClanId;
+use Package\Domain\ValueObject\Clan\ClanName;
 use Package\Domain\ValueObject\Datetime;
 use Package\Domain\BaseEntity as Entity;
 
 class Clan extends Entity {
     public function __construct(
-        private int $id,
-        private string $name,
+        private ClanId $id,
+        private ClanName $name,
         private Datetime $createdAt,
         private Datetime $updatedAt
-    ) {
-        if ($id === 0) {
-            throw new \InvalidArgumentException("clanIDの値が不正です。");
-        }
-        if (empty($name)) {
-            throw new \InvalidArgumentException("clan名が正しく設定されていません。");
-        }
-    }
+    ) {}
 
-    public function id(): int
+    public function id(): ClanId
     {
         return $this->id;
     }
 
-    public function name(): string
+    public function name(): ClanName
     {
         return $this->name;
     }
