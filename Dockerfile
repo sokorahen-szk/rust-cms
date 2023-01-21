@@ -19,6 +19,4 @@ ENV LOG_CHANNEL stderr
 # Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
-RUN cat '/usr/share/zoneinfo/Asia/Tokyo' > /etc/localtime
-
 CMD ["/start.sh"]
