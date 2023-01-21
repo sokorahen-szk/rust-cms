@@ -1,3 +1,7 @@
+
+test:
+	cd ./src && ./vendor/bin/pest -v
+
 docker-build:
 	docker-compose -f ./infra/docker-compose.yml \
 		--env-file ./infra/.local-env up
