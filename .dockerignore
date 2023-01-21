@@ -1,0 +1,7 @@
+vendor/
+node_modules/
+.dockerignore
+.gitignore
+.git
+.env-example
+.editorconfig

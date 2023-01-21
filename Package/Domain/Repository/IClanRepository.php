@@ -9,7 +9,7 @@ interface IClanRepository {
      * @param integer $id
      * @return Clan
      */
-    public function Find(int $id): Clan;
+    public function Get(int $id): Clan;
     /**
      * @return Clan[]
      */
