@@ -17,6 +17,6 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html
 COPY . ./
 
-RUN composer install
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
-RUN echo aaaa$PHP_INI_DIR
+RUN composer install
