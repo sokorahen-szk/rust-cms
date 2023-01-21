@@ -1,22 +1,22 @@
-# https://hub.docker.com/layers/library/php/8.2.1-apache/images/sha256-89ad17cca246e8a6ce742b5b89ce65b34ce6223204a282e45f72b4f758ff6401?context=explore
-FROM php:8.2.1-apache
+# template https://github.com/render-examples/php-laravel-docker/blob/master/Dockerfile
+# https://hub.docker.com/layers/richarvey/nginx-php-fpm/2.1.2/images/sha256-4a7e60888ea212617caa28bf4abddb634f486aaca9b002e33f38821e3825f711
+FROM richarvey/nginx-php-fpm:2.1.2
 
-RUN apt-get update && apt-get install -y \
-    zip \
-    unzip \
-    git
+COPY . .
 
-# ext-install
-RUN docker-php-ext-install -j "$(nproc)" opcache
+# Image config
+ENV SKIP_COMPOSER 1
+ENV WEBROOT /var/www/html/public
+ENV PHP_ERRORS_STDERR 1
+ENV RUN_SCRIPTS 1
+ENV REAL_IP_HEADER 1
 
-# ext-enable
-RUN docker-php-ext-enable opcache
+# Laravel config
+ENV APP_ENV production
+ENV APP_DEBUG false
+ENV LOG_CHANNEL stderr
 
-COPY --from=composer /usr/bin/composer /usr/bin/composer
+# Allow composer to run as root
+ENV COMPOSER_ALLOW_SUPERUSER 1
 
-WORKDIR /var/www/html
-COPY . ./
-
-RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
-
-RUN composer install
+CMD ["/start.sh"]
