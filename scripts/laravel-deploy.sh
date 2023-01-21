@@ -12,7 +12,7 @@ php artisan route:cache
 echo "Running migrations..."
 php artisan migrate --force
 
+cp /var/www/html/.env.example /var/www/html/.env
+
 echo "key generate..."
 php artisan key:generate
-
-echo "" > /var/www/html/.env
