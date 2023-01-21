@@ -14,3 +14,5 @@ php artisan migrate --force
 
 echo "key generate..."
 php artisan key:generate
+
+echo "" > /var/www/html/.env
