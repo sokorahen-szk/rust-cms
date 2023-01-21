@@ -18,3 +18,5 @@ WORKDIR /var/www/html
 COPY . ./
 
 RUN composer install
+
+RUN echo aaaa$PHP_INI_DIR
