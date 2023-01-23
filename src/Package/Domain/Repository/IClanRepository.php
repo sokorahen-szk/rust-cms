@@ -3,30 +3,31 @@
 namespace Package\Domain\Repository;
 
 use Package\Domain\Entity\Clan;
+use Package\Usecase\Input\ListClanInput;
 
 interface IClanRepository {
     /**
      * @param integer $id
      * @return Clan
      */
-    public function Get(int $id): Clan;
+    public function get(int $id): Clan;
     /**
      * @return Clan[]
      */
-    public function List(): array;
+    public function list(ListClanInput $input): array;
     /**
      * @param Clan $clan
      * @return void
      */
-    public function Create(Clan $clan): void;
+    public function create(Clan $clan): void;
     /**
      * @param Clan $clan
      * @return void
      */
-    public function Update(Clan $clan): void;
+    public function update(Clan $clan): void;
     /**
      * @param integer $id
      * @return void
      */
-    public function Delete(int $id): void;
+    public function delete(int $id): void;
 }
