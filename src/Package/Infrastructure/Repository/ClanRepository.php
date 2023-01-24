@@ -36,7 +36,9 @@ class ClanRepository implements IClanRepository {
      */
     public function list(ListClanInput $input): array
     {
-        $models = $this->clanModel->whereIn("id", $input->ids)->get();
+        $models = $this->clanModel
+            ->whereIn("id", $input->ids)
+            ->get();
         return $this->toClans($models);
     }
 
@@ -46,7 +48,10 @@ class ClanRepository implements IClanRepository {
      */
     public function create(Clan $clan): void
     {
-        //
+        $this->clanModel->create([
+            "id" => $clan->id()->value(),
+            "name" => $clan->name()->value(),
+        ]);
     }
 
     /**
@@ -55,7 +60,13 @@ class ClanRepository implements IClanRepository {
      */
     public function update(Clan $clan): void
     {
-        //
+        $updateFlag = $this->clanModel->where("id", $clan->id()->value())
+            ->update([
+                "name" => $clan->name()->value(),
+            ]);
+        if (!(bool) $updateFlag) {
+            throw new \Exception("failed to update clan.");
+        }
     }
 
     /**
@@ -64,7 +75,7 @@ class ClanRepository implements IClanRepository {
      */
     public function delete(int $id): void
     {
-        //
+        $this->clanModel->destroy($id);
     }
 
     /**
@@ -78,6 +89,10 @@ class ClanRepository implements IClanRepository {
         })->toArray();
     }
 
+    /**
+     * @param ClanModel $model
+     * @return Clan
+     */
     private function toClan(ClanModel $model): Clan
     {
         return new Clan(

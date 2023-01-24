@@ -34,4 +34,9 @@ class Clan extends Entity {
     {
         return $this->updatedAt;
     }
+
+    public function changeName(string $name): void
+    {
+        $this->name = new ClanName($name);
+    }
 }

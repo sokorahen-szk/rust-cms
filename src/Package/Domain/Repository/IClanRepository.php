@@ -12,6 +12,7 @@ interface IClanRepository {
      */
     public function get(int $id): Clan;
     /**
+     * @param ListClanInput $input
      * @return Clan[]
      */
     public function list(ListClanInput $input): array;

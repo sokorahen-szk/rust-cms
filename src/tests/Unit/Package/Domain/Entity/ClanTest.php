@@ -5,7 +5,7 @@ use Package\Domain\ValueObject\Clan\ClanId;
 use Package\Domain\ValueObject\Clan\ClanName;
 use Package\Domain\Entity\Clan;
 
-it("正常な引数をコンストラクタに渡した場合、エラーにならないこと", function() {
+test("正常な引数をコンストラクタに渡した場合、エラーにならないこと", function() {
     $clan = new Clan(
         new ClanId(1),
         new ClanName("クラン名"),
