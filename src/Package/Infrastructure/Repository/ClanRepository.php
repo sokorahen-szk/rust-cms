@@ -12,6 +12,9 @@ use Package\Usecase\Input\ListClanInput;
 use Illuminate\Database\Eloquent\Collection;
 
 class ClanRepository implements IClanRepository {
+    /**
+     * @param ClanModel $clanModel
+     */
     public function __construct(private ClanModel $clanModel)
     {}
 
@@ -57,6 +60,7 @@ class ClanRepository implements IClanRepository {
     /**
      * @param Clan $clan
      * @return void
+     * @throws Exception
      */
     public function update(Clan $clan): void
     {
@@ -72,10 +76,14 @@ class ClanRepository implements IClanRepository {
     /**
      * @param integer $id
      * @return void
+     * @throws Exception
      */
     public function delete(int $id): void
     {
-        $this->clanModel->destroy($id);
+        $deleteFlag = $this->clanModel->destroy($id);
+        if (!(bool) $deleteFlag) {
+            throw new \Exception("failed to delete clan.");
+        }
     }
 
     /**
