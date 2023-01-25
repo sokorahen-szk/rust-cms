@@ -3,7 +3,7 @@
 namespace Package\Domain\Repository;
 
 use Package\Domain\Entity\Clan;
-use Package\Usecase\Input\ListClanInput;
+use Package\Infrastructure\Input\ListClanInput;
 
 interface IClanRepository {
     /**

@@ -8,7 +8,7 @@ use Package\Domain\ValueObject\Clan\ClanId;
 use Package\Domain\ValueObject\Clan\ClanName;
 use Package\Domain\ValueObject\Datetime;
 use App\Models\Eloquent\ClanModel;
-use Package\Usecase\Input\ListClanInput;
+use Package\Infrastructure\Input\ListClanInput;
 use Illuminate\Database\Eloquent\Collection;
 
 class ClanRepository implements IClanRepository {

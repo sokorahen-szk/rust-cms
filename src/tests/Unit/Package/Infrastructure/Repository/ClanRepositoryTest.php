@@ -7,7 +7,7 @@ use Package\Domain\Entity\Clan;
 use Package\Domain\ValueObject\Clan\ClanId;
 use Package\Domain\ValueObject\Clan\ClanName;
 use Package\Domain\ValueObject\Datetime;
-use Package\Usecase\Input\ListClanInput;
+use Package\Infrastructure\Input\ListClanInput;
 
 test("get() id = 1のデータが存在している時、正しくデータが取得できること", function() {
     $repository = new ClanRepository(new ClanModel());
