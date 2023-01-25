@@ -14,6 +14,8 @@ class ClanModel extends Model
 
     protected $table = "clans";
 
+    protected $guarded = [];
+
     protected static function newFactory()
     {
         return ClanFactory::new();

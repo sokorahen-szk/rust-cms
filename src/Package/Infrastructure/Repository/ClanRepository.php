@@ -26,12 +26,7 @@ class ClanRepository implements IClanRepository {
     public function get(int $id): Clan
     {
         $model = $this->clanModel->findOrFail($id);
-        return new Clan(
-            new ClanId($model->id),
-            new ClanName($model->name),
-            new Datetime($model->created_at),
-            new Datetime($model->updated_at)
-        );
+        return $this->toClan($model);
     }
 
     /**
