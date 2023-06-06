@@ -11,35 +11,35 @@ use Package\Domain\Clan\ValueObject\ClanName;
 use Package\Domain\Shared\ValueObject\Datetime;
 use Package\Infrastructure\Input\ListClanInput;
 
-test("get() id = CA9E2714-CA0C-44BD-9E9D-6D072FF9281Bのデータが存在している時、正しくデータが取得できること", function () {
+test("get() id = ca9e2714-ca0c-44bd-9e9d-6d072ff9281bのデータが存在している時、正しくデータが取得できること", function () {
     $repository = new ClanRepository(new ClanModel());
 
     ClanModel::factory()->create([
-        "id" => "CA9E2714-CA0C-44BD-9E9D-6D072FF9281B",
+        "id" => "ca9e2714-ca0c-44bd-9e9d-6d072ff9281b",
     ]);
 
-    $actual = $repository->get(new ClanId("CA9E2714-CA0C-44BD-9E9D-6D072FF9281B"));
-    $this->assertEquals("CA9E2714-CA0C-44BD-9E9D-6D072FF9281B", $actual->id()->value());
+    $actual = $repository->get(new ClanId("ca9e2714-ca0c-44bd-9e9d-6d072ff9281b"));
+    $this->assertEquals("ca9e2714-ca0c-44bd-9e9d-6d072ff9281b", $actual->id()->value());
     $this->assertInstanceOf(Clan::class, $actual);
 });
 
-test("get() id = 96E18F71-1EDA-4764-AFD6-27D72CFB1857のデータが存在しない時、取得エラーになること", function () {
+test("get() id = 96e18f71-1eda-4764-afd6-27d72cfb1857のデータが存在しない時、取得エラーになること", function () {
     $repository = new ClanRepository(new ClanModel());
 
-    $repository->get(new ClanId("96E18F71-1EDA-4764-AFD6-27D72CFB1857"));
+    $repository->get(new ClanId("96e18f71-1eda-4764-afd6-27d72cfb1857"));
 })->throws(ModelNotFoundException::class);
 
 test("list() データが2件以上存在している時、複数データを返すこと", function () {
     $repository = new ClanRepository(new ClanModel());
 
     ClanModel::factory()->create([
-        "id" => "CA9E2714-CA0C-44BD-9E9D-6D072FF9281B",
+        "id" => "ca9e2714-ca0c-44bd-9e9d-6d072ff9281b",
     ]);
     ClanModel::factory()->create([
-        "id" => "96E18F71-1EDA-4764-AFD6-27D72CFB1857",
+        "id" => "96e18f71-1eda-4764-afd6-27d72cfb1857",
     ]);
     $actuals = $repository->list(new ListClanInput(
-        ["CA9E2714-CA0C-44BD-9E9D-6D072FF9281B", "96E18F71-1EDA-4764-AFD6-27D72CFB1857"]
+        ["ca9e2714-ca0c-44bd-9e9d-6d072ff9281b", "96e18f71-1eda-4764-afd6-27d72cfb1857"]
     ));
     $this->assertCount(2, $actuals);
     $this->assertInstanceOf(Clan::class, $actuals[0]);
@@ -50,23 +50,23 @@ test("list() id = 3のデータが存在しない時、0件で空を返すこと
     $repository = new ClanRepository(new ClanModel());
 
     ClanModel::factory()->create([
-        "id" => "CA9E2714-CA0C-44BD-9E9D-6D072FF9281B",
+        "id" => "ca9e2714-ca0c-44bd-9e9d-6d072ff9281b",
     ]);
     ClanModel::factory()->create([
-        "id" => "96E18F71-1EDA-4764-AFD6-27D72CFB1857",
+        "id" => "96e18f71-1eda-4764-afd6-27d72cfb1857",
     ]);
     $actuals = $repository->list(new ListClanInput(
-        ["FC714B6C-BACE-4D5C-BF56-AA304C36E19B"]
+        ["fc714b6c-bace-4d5c-bf56-aa304c36e19b"]
     ));
     $this->assertCount(0, $actuals);
     $this->assertEquals([], $actuals);
 });
 
-test("create() id = 64368EDC-BD22-4D8E-B5AD-624DBF8288FAのデータが作成できること", function () {
+test("create() id = 64368edc-bd22-4d8e-b5ad-624dbf8288faのデータが作成できること", function () {
     $repository = new ClanRepository(new ClanModel());
 
     $createClan = new Clan(
-        new ClanId("64368EDC-BD22-4D8E-B5AD-624DBF8288FA"),
+        new ClanId("64368edc-bd22-4d8e-b5ad-624dbf8288fa"),
         new ClanName("createClan"),
         new Datetime("2022-01-01 00:00:00"),
         new Datetime("2022-01-01 00:00:00")
@@ -74,33 +74,33 @@ test("create() id = 64368EDC-BD22-4D8E-B5AD-624DBF8288FAのデータが作成で
 
     $repository->create($createClan);
 
-    $actual = $repository->get(new ClanId("64368EDC-BD22-4D8E-B5AD-624DBF8288FA"));
-    $this->assertEquals("64368EDC-BD22-4D8E-B5AD-624DBF8288FA", $actual->id()->value());
+    $actual = $repository->get(new ClanId("64368edc-bd22-4d8e-b5ad-624dbf8288fa"));
+    $this->assertEquals("64368edc-bd22-4d8e-b5ad-624dbf8288fa", $actual->id()->value());
     $this->assertEquals("createClan", $actual->name()->value());
 });
 
-test("update() id = 64368EDC-BD22-4D8E-B5AD-624DBF8288FAのデータの名前がfugaからhogeに更新されること", function () {
+test("update() id = 64368edc-bd22-4d8e-b5ad-624dbf8288faのデータの名前がfugaからhogeに更新されること", function () {
     $repository = new ClanRepository(new ClanModel());
 
     ClanModel::factory()->create([
-        "id" => "64368EDC-BD22-4D8E-B5AD-624DBF8288FA",
+        "id" => "64368edc-bd22-4d8e-b5ad-624dbf8288fa",
         "name" => "fuga",
     ]);
 
-    $beforeClan = $repository->get(new ClanId("64368EDC-BD22-4D8E-B5AD-624DBF8288FA"));
+    $beforeClan = $repository->get(new ClanId("64368edc-bd22-4d8e-b5ad-624dbf8288fa"));
     $beforeClan->changeName("hoge");
 
     $repository->update($beforeClan);
 
-    $afterClan = $repository->get(new ClanId("64368EDC-BD22-4D8E-B5AD-624DBF8288FA"));
+    $afterClan = $repository->get(new ClanId("64368edc-bd22-4d8e-b5ad-624dbf8288fa"));
     $this->assertEquals("hoge", $afterClan->name()->value());
 });
 
-test("update() id = 8723C6CF-866E-4354-939E-411D28F596C1のデータが存在しない時、更新エラーになること", function () {
+test("update() id = 8723c6cf-866e-4354-939e-411d28f596c1のデータが存在しない時、更新エラーになること", function () {
     $repository = new ClanRepository(new ClanModel());
 
     $dummyClan = new Clan(
-        new ClanId("8723C6CF-866E-4354-939E-411D28F596C1"),
+        new ClanId("8723c6cf-866e-4354-939e-411d28f596c1"),
         new ClanName("dummy"),
         new Datetime("2022-01-01 00:00:00"),
         new Datetime("2022-01-01 00:00:00")
@@ -109,27 +109,27 @@ test("update() id = 8723C6CF-866E-4354-939E-411D28F596C1のデータが存在し
     $repository->update($dummyClan);
 })->throws(\Exception::class);
 
-test("delete() id = A4750C83-E2E5-4524-89F7-6AAFD5E3C70Aのデータが削除できること", function () {
+test("delete() id = a4750c83-e2e5-4524-89f7-6aafd5e3c70aのデータが削除できること", function () {
     $repository = new ClanRepository(new ClanModel());
 
     ClanModel::factory()->create([
-        "id" => "A4750C83-E2E5-4524-89F7-6AAFD5E3C70A",
+        "id" => "a4750c83-e2e5-4524-89f7-6aafd5e3c70a",
     ]);
 
-    $clan = $repository->get(new ClanId("A4750C83-E2E5-4524-89F7-6AAFD5E3C70A"));
+    $clan = $repository->get(new ClanId("a4750c83-e2e5-4524-89f7-6aafd5e3c70a"));
     $repository->delete($clan->id());
 
     $actuals = $repository->list(new ListClanInput(
-        [1]
+        ["a4750c83-e2e5-4524-89f7-6aafd5e3c70a"]
     ));
     $this->assertCount(0, $actuals);
 });
 
-test("delete() id = 399CE913-E659-4C8F-B332-960E136A2C4Cのデータが存在しない時、削除エラーになること", function () {
+test("delete() id = 399ce913-e659-4c8f-b332-960e136a2c4cのデータが存在しない時、削除エラーになること", function () {
     $repository = new ClanRepository(new ClanModel());
 
     $dummyClan = new Clan(
-        new ClanId("399CE913-E659-4C8F-B332-960E136A2C4C"),
+        new ClanId("399ce913-e659-4c8f-b332-960e136a2c4c"),
         new ClanName("dummy"),
         new Datetime("2022-01-01 00:00:00"),
         new Datetime("2022-01-01 00:00:00")

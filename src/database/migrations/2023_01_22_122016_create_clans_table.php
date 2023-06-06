@@ -13,7 +13,7 @@ return new class () extends Migration {
     public function up()
     {
         Schema::create("clans", function (Blueprint $table) {
-            $table->uuid('id')->primary()->comment("クランID");
+            $table->uuid('id', 36)->primary()->comment("クランID");
             $table->string("name")->comment("クラン名");
             $table->timestamps();
         });

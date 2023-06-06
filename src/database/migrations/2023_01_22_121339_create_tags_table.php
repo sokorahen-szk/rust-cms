@@ -13,7 +13,7 @@ return new class () extends Migration {
     public function up()
     {
         Schema::create("tags", function (Blueprint $table) {
-            $table->uuid("id")->primary()->comment("タグID");
+            $table->uuid("id", 36)->primary()->comment("タグID");
             $table->string("name")->comment("タグ名");
             $table->string("description")->comment("備考");
         });

@@ -16,8 +16,10 @@ class ClanModel extends Model
 
     protected $guarded = [];
 
+    protected $keyType = 'string';
+
     protected static function newFactory()
     {
         return ClanFactory::new();
-    }    
+    }
 }

@@ -19,7 +19,7 @@ class ClanFactory
     /**
      * @return Package\Domain\Clan\Entity\Clan
      */
-    public function factory(): Clan
+    public function make(): Clan
     {
         $id = (string) Str::uuid();
         return new Clan(

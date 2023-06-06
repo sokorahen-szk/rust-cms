@@ -13,8 +13,8 @@ return new class () extends Migration {
     public function up()
     {
         Schema::create("player_tags", function (Blueprint $table) {
-            $table->uuid("player_id")->comment("プレイヤーID");
-            $table->uuid("tag_id")->comment("タグID");
+            $table->uuid("player_id", 36)->comment("プレイヤーID");
+            $table->uuid("tag_id", 36)->comment("タグID");
 
             $table->foreign("player_id")->references("id")->on("players")->onUpdate("cascade")->onDelete("cascade");
             $table->foreign("tag_id")->references("id")->on("tags")->onUpdate("cascade")->onDelete("cascade");
