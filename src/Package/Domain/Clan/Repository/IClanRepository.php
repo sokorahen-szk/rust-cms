@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace Package\Domain\Clan\Repository;
 
 use Package\Domain\Clan\Entity\Clan;
+use Package\Domain\Clan\ValueObject\ClanId;
 use Package\Infrastructure\Input\ListClanInput;
 
 interface IClanRepository
 {
     /**
-     * @param integer $id
+     * @param ClanId $id
      * @return Clan
      */
-    public function get(int $id): Clan;
+    public function get(ClanId $id): Clan;
     /**
      * @param ListClanInput $input
      * @return Clan[]
@@ -30,8 +31,8 @@ interface IClanRepository
      */
     public function update(Clan $clan): void;
     /**
-     * @param integer $id
+     * @param ClanId $id
      * @return void
      */
-    public function delete(int $id): void;
+    public function delete(ClanId $id): void;
 }

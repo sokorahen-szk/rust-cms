@@ -4,9 +4,9 @@ namespace Package\Domain\Clan\ValueObject;
 
 class ClanId
 {
-    public function __construct(private int $value)
+    public function __construct(private string $value)
     {
-        if ($value === 0) {
+        if ($value === "") {
             throw new \InvalidArgumentException("clanIDの値が不正です。");
         }
     }

@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      *
@@ -14,7 +13,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create("roles", function (Blueprint $table) {
-            $table->id()->comment("ロールID");
+            $table->uuid("id")->primary()->comment("ロールID");
             // 権限レベルは、なし,r,w,rwのレベルを2進数->10進数に変換して管理する。
             // 記録されたpermissionの値を使うと時は、10進数->2進数に変換して制御を行う。
             // (0)10 (00)2 = なし

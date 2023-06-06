@@ -23,13 +23,13 @@ class ClanRepository implements IClanRepository
     }
 
     /**
-     * @param integer $id
+     * @param ClanId $id
      * @return Clan
      * @throws ModelNotFoundException
      */
-    public function get(int $id): Clan
+    public function get(ClanId $id): Clan
     {
-        $model = $this->clanModel->findOrFail($id);
+        $model = $this->clanModel->findOrFail($id->value());
         return $this->toClan($model);
     }
 
@@ -73,13 +73,13 @@ class ClanRepository implements IClanRepository
     }
 
     /**
-     * @param integer $id
+     * @param ClanId $id
      * @return void
      * @throws Exception
      */
-    public function delete(int $id): void
+    public function delete(ClanId $id): void
     {
-        $deleteFlag = $this->clanModel->destroy($id);
+        $deleteFlag = $this->clanModel->destroy($id->value());
         if (!(bool) $deleteFlag) {
             throw new \Exception("failed to delete clan.");
         }

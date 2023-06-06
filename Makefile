@@ -1,3 +1,5 @@
+migrate:
+	cd ./src && php artisan migrate:refresh --force
 
 test:
 	cd ./src && ./vendor/bin/pest -v
