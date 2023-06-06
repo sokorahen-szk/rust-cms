@@ -1,11 +1,14 @@
-<?php declare(strict_types=1);
+<?php
 
-namespace Package\Domain\Repository;
+declare(strict_types=1);
 
-use Package\Domain\Entity\Clan;
+namespace Package\Domain\Clan\Repository;
+
+use Package\Domain\Clan\Entity\Clan;
 use Package\Infrastructure\Input\ListClanInput;
 
-interface IClanRepository {
+interface IClanRepository
+{
     /**
      * @param integer $id
      * @return Clan

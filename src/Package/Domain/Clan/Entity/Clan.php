@@ -1,19 +1,23 @@
-<?php declare(strict_types=1);
+<?php
 
-namespace Package\Domain\Entity;
+declare(strict_types=1);
 
-use Package\Domain\ValueObject\Clan\ClanId;
-use Package\Domain\ValueObject\Clan\ClanName;
-use Package\Domain\ValueObject\Datetime;
-use Package\Domain\BaseEntity as Entity;
+namespace Package\Domain\Clan\Entity;
 
-class Clan extends Entity {
+use Package\Domain\Clan\ValueObject\ClanId;
+use Package\Domain\Clan\ValueObject\ClanName;
+use Package\Domain\Shared\ValueObject\Datetime;
+use Package\Domain\Shared\BaseEntity as Entity;
+
+class Clan extends Entity
+{
     public function __construct(
         private ClanId $id,
         private ClanName $name,
         private Datetime $createdAt,
         private Datetime $updatedAt
-    ) {}
+    ) {
+    }
 
     public function id(): ClanId
     {

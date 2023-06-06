@@ -1,6 +1,9 @@
-<?php namespace Package\Domain\ValueObject\Clan;
+<?php
 
-class ClanName {
+namespace Package\Domain\Clan\ValueObject;
+
+class ClanName
+{
     public function __construct(private string $value)
     {
         if (empty($value)) {

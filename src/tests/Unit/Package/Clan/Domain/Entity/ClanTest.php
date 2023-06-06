@@ -1,11 +1,13 @@
-<?php namespace Tests\Unit\Package\Domain\Entity;
+<?php
 
-use Package\Domain\ValueObject\Datetime;
-use Package\Domain\ValueObject\Clan\ClanId;
-use Package\Domain\ValueObject\Clan\ClanName;
-use Package\Domain\Entity\Clan;
+namespace Tests\Unit\Package\Domain\Clan\Entity;
 
-test("正常な引数をコンストラクタに渡した場合、エラーにならないこと", function() {
+use Package\Domain\Shared\ValueObject\Datetime;
+use Package\Domain\Clan\ValueObject\ClanId;
+use Package\Domain\Clan\ValueObject\ClanName;
+use Package\Domain\Clan\Entity\Clan;
+
+test("正常な引数をコンストラクタに渡した場合、エラーにならないこと", function () {
     $clan = new Clan(
         new ClanId(1),
         new ClanName("クラン名"),

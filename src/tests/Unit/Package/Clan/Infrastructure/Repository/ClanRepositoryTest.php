@@ -1,15 +1,17 @@
-<?php namespace Tests\Unit\Package\Infrastructure\Repository;
+<?php
+
+namespace Tests\Unit\Package\Infrastructure\Repository;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Package\Infrastructure\Repository\ClanRepository;
 use App\Models\Eloquent\ClanModel;
-use Package\Domain\Entity\Clan;
-use Package\Domain\ValueObject\Clan\ClanId;
-use Package\Domain\ValueObject\Clan\ClanName;
-use Package\Domain\ValueObject\Datetime;
+use Package\Domain\Clan\Entity\Clan;
+use Package\Domain\Clan\ValueObject\ClanId;
+use Package\Domain\Clan\ValueObject\ClanName;
+use Package\Domain\Shared\ValueObject\Datetime;
 use Package\Infrastructure\Input\ListClanInput;
 
-test("get() id = 1のデータが存在している時、正しくデータが取得できること", function() {
+test("get() id = 1のデータが存在している時、正しくデータが取得できること", function () {
     $repository = new ClanRepository(new ClanModel());
 
     ClanModel::factory()->create([
@@ -21,13 +23,13 @@ test("get() id = 1のデータが存在している時、正しくデータが�
     $this->assertInstanceOf(Clan::class, $actual);
 });
 
-test("get() id = 2のデータが存在しない時、取得エラーになること", function() {
+test("get() id = 2のデータが存在しない時、取得エラーになること", function () {
     $repository = new ClanRepository(new ClanModel());
 
     $repository->get(2);
 })->throws(ModelNotFoundException::class);
 
-test("list() id = 1, 2のデータが存在している時、2件返すこと", function() {
+test("list() id = 1, 2のデータが存在している時、2件返すこと", function () {
     $repository = new ClanRepository(new ClanModel());
 
     ClanModel::factory()->create([
@@ -44,7 +46,7 @@ test("list() id = 1, 2のデータが存在している時、2件返すこと", 
     $this->assertInstanceOf(Clan::class, $actuals[1]);
 });
 
-test("list() id = 3のデータが存在しない時、0件で空を返すこと", function() {
+test("list() id = 3のデータが存在しない時、0件で空を返すこと", function () {
     $repository = new ClanRepository(new ClanModel());
 
     ClanModel::factory()->create([
@@ -60,7 +62,7 @@ test("list() id = 3のデータが存在しない時、0件で空を返すこと
     $this->assertEquals([], $actuals);
 });
 
-test("create() id = 999のデータが作成できること", function() {
+test("create() id = 999のデータが作成できること", function () {
     $repository = new ClanRepository(new ClanModel());
 
     $createClan = new Clan(
@@ -77,7 +79,7 @@ test("create() id = 999のデータが作成できること", function() {
     $this->assertEquals("createClan", $actual->name()->value());
 });
 
-test("update() id = 1のデータの名前がfugaからhogeに更新されること", function() {
+test("update() id = 1のデータの名前がfugaからhogeに更新されること", function () {
     $repository = new ClanRepository(new ClanModel());
 
     ClanModel::factory()->create([
@@ -94,7 +96,7 @@ test("update() id = 1のデータの名前がfugaからhogeに更新されるこ
     $this->assertEquals("hoge", $afterClan->name()->value());
 });
 
-test("update() id = 1のデータが存在しない時、更新エラーになること", function() {
+test("update() id = 1のデータが存在しない時、更新エラーになること", function () {
     $repository = new ClanRepository(new ClanModel());
 
     $dummyClan = new Clan(
@@ -107,7 +109,7 @@ test("update() id = 1のデータが存在しない時、更新エラーにな�
     $repository->update($dummyClan);
 })->throws(\Exception::class);
 
-test("delete() id = 1のデータが削除できること", function() {
+test("delete() id = 1のデータが削除できること", function () {
     $repository = new ClanRepository(new ClanModel());
 
     ClanModel::factory()->create([
@@ -123,7 +125,7 @@ test("delete() id = 1のデータが削除できること", function() {
     $this->assertCount(0, $actuals);
 });
 
-test("delete() id = 1のデータが存在しない時、削除エラーになること", function() {
+test("delete() id = 1のデータが存在しない時、削除エラーになること", function () {
     $repository = new ClanRepository(new ClanModel());
 
     $dummyClan = new Clan(

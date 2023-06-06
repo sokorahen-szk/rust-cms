@@ -1,6 +1,9 @@
-<?php namespace Package\Domain\ValueObject\Clan;
+<?php
 
-class ClanId {
+namespace Package\Domain\Clan\ValueObject;
+
+class ClanId
+{
     public function __construct(private int $value)
     {
         if ($value === 0) {

@@ -1,22 +1,26 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Package\Infrastructure\Repository;
 
-use Package\Domain\Repository\IClanRepository;
-use Package\Domain\Entity\Clan;
-use Package\Domain\ValueObject\Clan\ClanId;
-use Package\Domain\ValueObject\Clan\ClanName;
-use Package\Domain\ValueObject\Datetime;
+use Package\Domain\Clan\Repository\IClanRepository;
+use Package\Domain\Clan\Entity\Clan;
+use Package\Domain\Clan\ValueObject\ClanId;
+use Package\Domain\Clan\ValueObject\ClanName;
+use Package\Domain\Shared\ValueObject\Datetime;
 use App\Models\Eloquent\ClanModel;
 use Package\Infrastructure\Input\ListClanInput;
 use Illuminate\Database\Eloquent\Collection;
 
-class ClanRepository implements IClanRepository {
+class ClanRepository implements IClanRepository
+{
     /**
      * @param ClanModel $clanModel
      */
     public function __construct(private ClanModel $clanModel)
-    {}
+    {
+    }
 
     /**
      * @param integer $id
