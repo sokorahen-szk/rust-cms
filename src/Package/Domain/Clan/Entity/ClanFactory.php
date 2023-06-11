@@ -22,11 +22,12 @@ class ClanFactory
     public function make(): Clan
     {
         $id = (string) Str::uuid();
+        $now = now();
         return new Clan(
             new ClanId($id),
             new ClanName($this->name),
-            new Datetime(now()),
-            new Datetime(now()),
+            new Datetime($now),
+            new Datetime($now),
         );
     }
 }

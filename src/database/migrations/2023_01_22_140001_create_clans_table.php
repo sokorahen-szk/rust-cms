@@ -15,7 +15,10 @@ return new class () extends Migration {
         Schema::create("clans", function (Blueprint $table) {
             $table->uuid('id', 36)->primary()->comment("クランID");
             $table->string("name")->comment("クラン名");
+            $table->uuid("created_user_id", 36)->nullable()->comment("作成ユーザID");
             $table->timestamps();
+
+            $table->foreign("created_user_id")->references("id")->on("users")->onUpdate("CASCADE")->onDelete("CASCADE");
         });
     }
 
