@@ -15,6 +15,15 @@ return new class () extends Migration {
         Schema::create("users", function (Blueprint $table) {
             $table->uuid("id", 36)->primary()->comment("ユーザID");
             $table->string("name")->comment("ユーザ名");
+            //
+            // users.status
+            // WAITING - アカウント作成途中で中断した場合
+            // INACTIVE - アカウント無効
+            // ACTIVE - アカウント有効
+            // WITHDRAWN - アカウント退会済み
+            // BANNED - アカウント停止
+            //
+            $table->enum("status", ["WAITING", "INACTIVE", "ACTIVE", "ACTIVE", "BANNED"])->comment("ユーザステータス");
             $table->uuid("role_id", 36)->comment("ロールID");
             $table->string("email")->unique()->nullable()->comment("メールアドレス");
             $table->timestamp("email_verified_at")->nullable()->comment("メールアドレス有効化日時");
