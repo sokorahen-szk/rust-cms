@@ -23,7 +23,7 @@ return new class () extends Migration {
             // 例えば、ユーザ作成とプレイヤー作成の画面があるとする。
             // ユーザ作成 (00)2 プレイヤー作成 (00)2 の場合、権限レベルは(0000)2 (0)10となる。
             // ユーザ作成 (01)2 プレイヤー作成 (11)2 の場合、権限レベルは(0111)2 (7)10となる。
-            $table->integer("permission")->comment("権限レベル");
+            $table->bigInteger("permission")->comment("権限レベル");
             $table->string("description")->nullable()->comment("備考");
         });
     }

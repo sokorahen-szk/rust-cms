@@ -4,11 +4,15 @@ namespace Tests\Unit\Package\Infrastructure\Repository;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Package\Infrastructure\Repository\ClanRepository;
-use App\Models\Eloquent\ClanModel;
+use App\Models\ClanModel;
+use App\Models\User;
 use Package\Domain\Clan\Entity\Clan;
 use Package\Domain\Clan\ValueObject\ClanId;
 use Package\Domain\Clan\ValueObject\ClanName;
+use Package\Domain\Clan\ValueObject\ImageUrl;
+use Package\Domain\Clan\ValueObject\Introduction;
 use Package\Domain\Shared\ValueObject\Datetime;
+use Package\Domain\User\ValueObject\UserId;
 use Package\Infrastructure\Input\ListClanInput;
 
 test("get() id = ca9e2714-ca0c-44bd-9e9d-6d072ff9281bのデータが存在している時、正しくデータが取得できること", function () {
@@ -46,7 +50,7 @@ test("list() データが2件以上存在している時、複数データを返
     $this->assertInstanceOf(Clan::class, $actuals[1]);
 });
 
-test("list() id = 3のデータが存在しない時、0件で空を返すこと", function () {
+test("list() id = fc714b6c-bace-4d5c-bf56-aa304c36e19bのデータが存在しない時、0件で空を返すこと", function () {
     $repository = new ClanRepository(new ClanModel());
 
     ClanModel::factory()->create([
@@ -62,21 +66,31 @@ test("list() id = 3のデータが存在しない時、0件で空を返すこと
     $this->assertEquals([], $actuals);
 });
 
-test("create() id = 64368edc-bd22-4d8e-b5ad-624dbf8288faのデータが作成できること", function () {
+test("create() id = 225600c0-fd1c-46d5-b4dd-abfcd5a6f255のデータが作成できること", function () {
     $repository = new ClanRepository(new ClanModel());
 
+    User::factory()->create([
+        "id" => "4df58aa0-94e5-45e1-8450-f3b0e3886031",
+    ]);
+
     $createClan = new Clan(
-        new ClanId("64368edc-bd22-4d8e-b5ad-624dbf8288fa"),
+        new ClanId("225600c0-fd1c-46d5-b4dd-abfcd5a6f255"),
         new ClanName("createClan"),
+        new ImageUrl("hogehoge.jpg"),
+        new Introduction("aiueo"),
+        new UserId("4df58aa0-94e5-45e1-8450-f3b0e3886031"),
         new Datetime("2022-01-01 00:00:00"),
         new Datetime("2022-01-01 00:00:00")
     );
 
     $repository->create($createClan);
 
-    $actual = $repository->get(new ClanId("64368edc-bd22-4d8e-b5ad-624dbf8288fa"));
-    $this->assertEquals("64368edc-bd22-4d8e-b5ad-624dbf8288fa", $actual->id()->value());
+    $actual = $repository->get(new ClanId("225600c0-fd1c-46d5-b4dd-abfcd5a6f255"));
+    $this->assertEquals("225600c0-fd1c-46d5-b4dd-abfcd5a6f255", $actual->id()->value());
     $this->assertEquals("createClan", $actual->name()->value());
+    $this->assertEquals("hogehoge.jpg", $actual->imageUrl()->value());
+    $this->assertEquals("aiueo", $actual->introduction()->value());
+    $this->assertEquals("4df58aa0-94e5-45e1-8450-f3b0e3886031", $actual->createdUserId()->value());
 });
 
 test("update() id = 64368edc-bd22-4d8e-b5ad-624dbf8288faのデータの名前がfugaからhogeに更新されること", function () {
@@ -102,6 +116,9 @@ test("update() id = 8723c6cf-866e-4354-939e-411d28f596c1のデータが存在し
     $dummyClan = new Clan(
         new ClanId("8723c6cf-866e-4354-939e-411d28f596c1"),
         new ClanName("dummy"),
+        new ImageUrl("hogehoge.jpg"),
+        new Introduction("aiueo"),
+        new UserId("4df58aa0-94e5-45e1-8450-f3b0e3886031"),
         new Datetime("2022-01-01 00:00:00"),
         new Datetime("2022-01-01 00:00:00")
     );
@@ -131,6 +148,9 @@ test("delete() id = 399ce913-e659-4c8f-b332-960e136a2c4cのデータが存在し
     $dummyClan = new Clan(
         new ClanId("399ce913-e659-4c8f-b332-960e136a2c4c"),
         new ClanName("dummy"),
+        new ImageUrl("hogehoge.jpg"),
+        new Introduction("aiueo"),
+        new UserId("4df58aa0-94e5-45e1-8450-f3b0e3886031"),
         new Datetime("2022-01-01 00:00:00"),
         new Datetime("2022-01-01 00:00:00")
     );

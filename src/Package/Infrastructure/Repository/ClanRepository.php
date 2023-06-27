@@ -9,9 +9,12 @@ use Package\Domain\Clan\Entity\Clan;
 use Package\Domain\Clan\ValueObject\ClanId;
 use Package\Domain\Clan\ValueObject\ClanName;
 use Package\Domain\Shared\ValueObject\Datetime;
-use App\Models\Eloquent\ClanModel;
+use App\Models\ClanModel;
 use Package\Infrastructure\Input\ListClanInput;
 use Illuminate\Database\Eloquent\Collection;
+use Package\Domain\Clan\ValueObject\ImageUrl;
+use Package\Domain\Clan\ValueObject\Introduction;
+use Package\Domain\User\ValueObject\UserId;
 
 class ClanRepository implements IClanRepository
 {
@@ -53,6 +56,9 @@ class ClanRepository implements IClanRepository
         $this->clanModel->create([
             "id" => $clan->id()->value(),
             "name" => $clan->name()->value(),
+            "image_url" => $clan->imageUrl()->value(),
+            "introduction" => $clan->introduction()->value(),
+            "created_user_id" => $clan->createdUserId()->value(),
         ]);
     }
 
@@ -66,6 +72,8 @@ class ClanRepository implements IClanRepository
         $updateFlag = $this->clanModel->where("id", $clan->id()->value())
             ->update([
                 "name" => $clan->name()->value(),
+                "image_url" => $clan->imageUrl()->value(),
+                "introduction" => $clan->introduction()->value(),
             ]);
         if (!(bool) $updateFlag) {
             throw new \Exception("failed to update clan.");
@@ -105,6 +113,9 @@ class ClanRepository implements IClanRepository
         return new Clan(
             new ClanId($model->id),
             new ClanName($model->name),
+            new ImageUrl($model->image_url),
+            new Introduction($model->introduction),
+            new UserId($model->created_user_id),
             new Datetime($model->created_at),
             new Datetime($model->updated_at)
         );

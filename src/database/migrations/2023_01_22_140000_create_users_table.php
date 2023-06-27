@@ -23,7 +23,7 @@ return new class () extends Migration {
             // WITHDRAWN - アカウント退会済み
             // BANNED - アカウント停止
             //
-            $table->enum("status", ["WAITING", "INACTIVE", "ACTIVE", "ACTIVE", "BANNED"])->comment("ユーザステータス");
+            $table->enum("status", ["WAITING", "INACTIVE", "ACTIVE", "WITHDRAWN", "BANNED"])->comment("ユーザステータス");
             $table->uuid("role_id", 36)->comment("ロールID");
             $table->string("email")->unique()->nullable()->comment("メールアドレス");
             $table->timestamp("email_verified_at")->nullable()->comment("メールアドレス有効化日時");
