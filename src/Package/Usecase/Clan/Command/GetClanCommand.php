@@ -1,7 +1,12 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Package\Usecase\Clan\Command;
 
-class GetClanCommand {
-    public function __construct(public int $id){}
+class GetClanCommand
+{
+    public function __construct(public string $id)
+    {
+    }
 }
