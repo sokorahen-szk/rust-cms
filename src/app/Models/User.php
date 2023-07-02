@@ -33,6 +33,9 @@ class User extends Authenticatable
         "status",
         "role_id",
         "email",
+        "discord_id",
+        "twitter_id",
+        "steam_id",
         "description",
         "created_user_id",
     ];
