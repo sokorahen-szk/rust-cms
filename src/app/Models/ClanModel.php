@@ -18,6 +18,11 @@ class ClanModel extends Model
 
     protected $keyType = 'string';
 
+    public function user()
+    {
+        return $this->hasMany(User::class, "id", "created_user_id");
+    }
+
     protected static function newFactory()
     {
         return ClanFactory::new();
