@@ -15,6 +15,7 @@ class GetClanResponse
     public string $introduction;
     public Datetime $createdAt;
     public Datetime $updatedAt;
+
     /**
      * @param Clan $clan
      */

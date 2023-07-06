@@ -42,6 +42,7 @@ class ClanRepository implements IClanRepository
     public function list(ListClanInput $input): array
     {
         $models = $this->clanModel
+            ->whereKeywordSearch($input->splitKeywords())
             ->whereIn("id", $input->ids)
             ->get();
         return $this->toClans($models);

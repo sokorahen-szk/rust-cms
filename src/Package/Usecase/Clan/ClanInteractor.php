@@ -17,8 +17,9 @@ class ClanInteractor implements IClanInteractor
     /**
      * @param IClanRepository $clanRepository
      */
-    public function __construct(private IClanRepository $clanRepository)
-    {
+    public function __construct(
+        private IClanRepository $clanRepository
+    ) {
     }
 
     public function get(GetClanCommand $command): GetClanResponse
@@ -30,7 +31,7 @@ class ClanInteractor implements IClanInteractor
     public function list(ListClanCommand $command): ListClanResponse
     {
         $clans = $this->clanRepository->list(
-            new ListClanInput($command->ids)
+            new ListClanInput($command->ids, $command->tagIds, $command->keyword)
         );
         return new ListClanResponse($clans);
     }
