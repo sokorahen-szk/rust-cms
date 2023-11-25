@@ -21,14 +21,13 @@ class ClanFactory extends Factory
      */
     public function definition()
     {
+        $user = User::factory()->create();
         return [
             "id" => (string) Str::uuid(),
             "name" => fake()->country(),
             "image_url" => "hogehoge.jpg",
             "introduction" => fake()->text(),
-            "created_user_id" => function () {
-                return User::factory()->create()->id;
-            },
+            "created_user_id" => $user->id,
             "created_at" => now(),
             "updated_at" => now(),
         ];

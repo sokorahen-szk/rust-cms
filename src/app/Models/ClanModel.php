@@ -10,18 +10,27 @@ class ClanModel extends Model
 {
     use HasFactory;
 
-    protected $connection = "pgsql";
-
     protected $table = "clans";
 
     protected $guarded = [];
 
     protected $keyType = 'string';
 
+    public $incrementing = false;
+
     public function scopeWhereKeywordSearch($query, array $keywords)
     {
         $query = $this->whereName($query, $keywords);
         $query = $this->whereIntroduction($query, $keywords);
+        return $query;
+    }
+
+    public function scopeWhereIn($query, string $key, array $ids)
+    {
+        if (count($ids) !== 0) {
+            $query->whereIn($key, $ids);
+        }
+
         return $query;
     }
 

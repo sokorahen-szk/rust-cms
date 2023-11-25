@@ -1,5 +1,6 @@
 migrate:
 	docker exec -i apache php artisan migrate:refresh --force
+	docker exec -i apache php artisan db:seed
 
 test:
 	docker exec -i apache ./vendor/bin/pest -v

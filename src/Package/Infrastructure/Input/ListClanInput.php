@@ -7,9 +7,9 @@ namespace Package\Infrastructure\Input;
 class ListClanInput
 {
     public function __construct(
-        public array $ids = [],
-        public array $tagIds = [],
-        private string $keyword = ""
+        public array $ids,
+        public array $tagIds,
+        private string $keyword
     ) {
     }
 

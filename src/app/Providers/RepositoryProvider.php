@@ -4,23 +4,23 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+class RepositoryProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * Register services.
      *
      * @return void
      */
     public function register()
     {
         $this->app->bind(
-            \Package\Usecase\Clan\IClanInteractor::class,
-            \Package\Usecase\Clan\ClanInteractor::class
+            \Package\Domain\Clan\Repository\IClanRepository::class,
+            \Package\Infrastructure\Repository\ClanRepository::class
         );
     }
 
     /**
-     * Bootstrap any application services.
+     * Bootstrap services.
      *
      * @return void
      */

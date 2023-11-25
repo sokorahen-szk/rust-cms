@@ -11,6 +11,7 @@ use Package\Domain\Clan\ValueObject\ImageUrl;
 use Package\Domain\Clan\ValueObject\Introduction;
 use Package\Domain\Shared\ValueObject\Datetime;
 use Package\Domain\User\ValueObject\UserId;
+use Package\Domain\Clan\Entity\Clan;
 
 class ClanFactory
 {
@@ -23,7 +24,7 @@ class ClanFactory
     }
 
     /**
-     * @return Package\Domain\Clan\Entity\Clan
+     * @return Clan
      */
     public function make(): Clan
     {

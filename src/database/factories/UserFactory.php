@@ -6,6 +6,7 @@ use App\Models\RoleModel;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -22,8 +23,10 @@ class UserFactory extends Factory
     public function definition()
     {
         $statuses = ["WAITING", "INACTIVE", "ACTIVE", "WITHDRAWN", "BANNED"];
+
         return [
             "id" => (string) Str::uuid(),
+            "account_id" => "test_user_" . mt_rand(),
             "name" => fake()->name(),
             "status" => $statuses[mt_rand(0, count($statuses) - 1)],
             "role_id" => function () {

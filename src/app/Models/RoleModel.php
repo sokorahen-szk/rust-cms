@@ -10,8 +10,6 @@ class RoleModel extends Model
 {
     use HasFactory;
 
-    protected $connection = "pgsql";
-
     protected $table = "roles";
 
     protected $guarded = [];
@@ -19,6 +17,8 @@ class RoleModel extends Model
     protected $keyType = 'string';
 
     public $timestamps = false;
+
+    public $incrementing = false;
 
     protected static function newFactory()
     {
