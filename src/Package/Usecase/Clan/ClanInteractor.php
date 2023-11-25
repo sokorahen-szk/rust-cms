@@ -9,6 +9,8 @@ use Package\Infrastructure\Input\ListClanInput;
 use Package\Usecase\Clan\Command\CreateClanCommand;
 use Package\Usecase\Clan\Command\GetClanCommand;
 use Package\Usecase\Clan\Command\ListClanCommand;
+use Package\Usecase\Clan\Command\UpdateClanCommand;
+use Package\Usecase\Clan\Command\DeleteClanCommand;
 use Package\Usecase\Clan\Response\GetClanResponse;
 use Package\Usecase\Clan\Response\ListClanResponse;
 
@@ -38,14 +40,27 @@ class ClanInteractor implements IClanInteractor
 
     public function create(CreateClanCommand $command): void
     {
-        // TODO: ここはuserIDを指定する
-        $createdUserId = "a";
         $factory = new ClanFactory(
             $command->name,
             $command->imageUrl,
             $command->introduction,
-            $createdUserId
+            $command->userId,
         );
         $this->clanRepository->create($factory->make());
+    }
+
+    public function update(UpdateClanCommand $command): void
+    {
+        $clan = $this->clanRepository->get(new ClanId($command->id));
+        $clan->changeName($command->name);
+        $clan->changeImageUrl($command->imageUrl);
+        $clan->changeIntroduction($command->introduction);
+
+        $this->clanRepository->update($clan);
+    }
+
+    public function delete(DeleteClanCommand $command): void
+    {
+        $this->clanRepository->delete(new ClanId($command->id));
     }
 }

@@ -4,30 +4,40 @@ namespace App\Http\Controllers;
 
 class AuthController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware("auth:api", ["except" => ["login"]]);
+    }
+
     /**
      * @return \Illuminate\Http\JsonResponse
      */
     public function login()
     {
-        if (auth()->check()) {
-            return redirect()->route('index');
+        $credentials = request(["account_id", "password"]);
+
+        if (!$token = auth()->attempt($credentials)) {
+            return response()->json(["error" => "Unauthorized"], 401);
         }
 
-        $credentials = request(['account_id', 'password']);
-
-        if (!auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-
-        return redirect()->route('index');
+        return $this->respondWithToken($token);
     }
 
-    public function logout()
+    /**
+     * Get the token array structure.
+     *
+     * @param  string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function respondWithToken($token)
     {
-        if (auth()->check()) {
-            auth()->logout();
-        }
-
-        return redirect()->route('index');
+        # This function is used to make JSON response with new
+        # access token of current user
+        return response()->json([
+            "access_token" => $token,
+            "token_type" => "bearer",
+            "expires_in" => auth()->factory()->getTTL() * 60
+        ]);
     }
 }

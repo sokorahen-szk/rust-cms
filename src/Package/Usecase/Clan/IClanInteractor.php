@@ -2,6 +2,8 @@
 
 namespace Package\Usecase\Clan;
 
+use Package\Usecase\Clan\Command\DeleteClanCommand;
+use Package\Usecase\Clan\Command\UpdateClanCommand;
 use Package\Usecase\Clan\Command\CreateClanCommand;
 use Package\Usecase\Clan\Command\GetClanCommand;
 use Package\Usecase\Clan\Command\ListClanCommand;
@@ -23,4 +25,12 @@ interface IClanInteractor {
      * @param CreateClanCommand $command
      */
     public function create(CreateClanCommand $command): void;
+    /**
+     * @param UpdateClanCommand $command
+     */
+    public function update(UpdateClanCommand $command): void;
+    /**
+     * @param DeleteClanCommand $command
+     */
+    public function delete(DeleteClanCommand $command): void;
 }

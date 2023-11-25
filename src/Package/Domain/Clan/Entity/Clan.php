@@ -69,4 +69,15 @@ class Clan extends Entity
     {
         $this->name = new ClanName($name);
     }
+
+    public function changeImageUrl(string $imageUrl): void
+    {
+        $this->imageUrl = new ImageUrl($imageUrl);
+    }
+
+
+    public function changeIntroduction(string $introduction): void
+    {
+        $this->introduction = new Introduction($introduction);
+    }
 }

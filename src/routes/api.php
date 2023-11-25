@@ -14,10 +14,13 @@ use App\Http\Controllers\AuthController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::middleware(["api"])->resource("clans", ClanController::class);
+
 Route::group([
-    "middleware" => "auth",
+    "middleware" => "api",
+    "prefix" => "auth"
 ], function() {
-    Route::resources([
-        "clans" => ClanController::class,
-    ]);
+    Route::get("/logout", [AuthController::class, "logout"]);
+    Route::post("/login", [AuthController::class, "login"]);
 });

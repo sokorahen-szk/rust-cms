@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Package\Usecase\Clan\Command;
 
-class CreateClanCommand
+class UpdateClanCommand
 {
     public function __construct(
+        public string $id,
         public string $name,
         public string $imageUrl,
-        public string $introduction,
-        public string $userId
+        public string $introduction
     )
     {
     }

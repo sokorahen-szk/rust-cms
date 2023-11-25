@@ -20,10 +20,3 @@ Route::get("/", function() {
 Route::get("/login", function() {
     return view("login");
 })->name("login");
-
-Route::group([
-    "middleware" => "auth"
-], function() {
-    Route::get("/logout", [AuthController::class, "logout"]);
-});
-Route::post("/login", [AuthController::class, "login"]);

@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Api;
 
-class ClanCreateRequest extends BaseRequest
+class ClanUpdateRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.

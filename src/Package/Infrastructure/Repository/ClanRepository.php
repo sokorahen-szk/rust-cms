@@ -44,6 +44,7 @@ class ClanRepository implements IClanRepository
         $models = $this->clanModel
             ->whereKeywordSearch($input->splitKeywords())
             ->whereIn("id", $input->ids)
+            ->orderBy("created_at", "desc")
             ->get();
         return $this->toClans($models);
     }
@@ -88,7 +89,7 @@ class ClanRepository implements IClanRepository
      */
     public function delete(ClanId $id): void
     {
-        $deleteFlag = $this->clanModel->destroy($id->value());
+        $deleteFlag = $this->clanModel->findOrFail($id->value())->delete();
         if (!(bool) $deleteFlag) {
             throw new \Exception("failed to delete clan.");
         }
