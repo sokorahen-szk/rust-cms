@@ -16,6 +16,9 @@ class UserStatus
     // アカウント退会済み
     public const WITHDRAWN = "WITHDRAWN";
 
+    // 運用上、特殊な用件で使用する場合にロックする
+    public const SPECIAL_REQUIREMENT_LOCK = "SPECIAL_REQUIREMENT_LOCK";
+
     // アカウント停止
     public const BANNED = "BANNED";
 
@@ -26,6 +29,7 @@ class UserStatus
             self::INACTIVE,
             self::ACTIVE,
             self::WITHDRAWN,
+            self::SPECIAL_REQUIREMENT_LOCK,
             self::BANNED,
         ];
 

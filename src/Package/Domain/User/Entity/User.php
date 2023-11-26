@@ -23,6 +23,7 @@ class User extends Entity
         private UserStatus $status,
         private Email $email,
         private Datetime $emailVeifiedAt,
+        private string $battleMetricsId,
         private string $discordId,
         private string $twitterId,
         private string $steamId,
@@ -67,6 +68,11 @@ class User extends Entity
     public function emailVeifiedAt(): Datetime
     {
         return $this->emailVeifiedAt;
+    }
+
+    public function battleMetricsId(): string
+    {
+        return $this->battleMetricsId;
     }
 
     public function discordId(): string
