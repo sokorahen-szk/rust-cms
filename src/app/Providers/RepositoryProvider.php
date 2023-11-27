@@ -15,7 +15,15 @@ class RepositoryProvider extends ServiceProvider
     {
         $this->app->bind(
             \Package\Domain\Clan\Repository\IClanRepository::class,
-            \Package\Infrastructure\Repository\ClanRepository::class
+            \Package\Infrastructure\Clan\Repository\ClanRepository::class
+        );
+        $this->app->bind(
+            \Package\Domain\Plyaer\Repository\IPlayerRepository::class,
+            \Package\Infrastructure\Plyaer\Repository\PlayerRepository::class
+        );
+        $this->app->bind(
+            \Package\Domain\User\Repository\IUserRepository::class,
+            \Package\Infrastructure\User\Repository\UserRepository::class
         );
     }
 

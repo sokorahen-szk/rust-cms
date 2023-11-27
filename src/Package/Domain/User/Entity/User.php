@@ -19,19 +19,18 @@ class User extends Entity
         private UserId $id,
         private AccountId $accountId,
         private string $name,
-        private RoleId $roleId,
         private UserStatus $status,
+        private RoleId $roleId,
         private Email $email,
         private Datetime $emailVeifiedAt,
-        private string $battleMetricsId,
         private string $discordId,
         private string $twitterId,
         private string $steamId,
         private Password $password,
         private string $description,
+        private ?UserId $createUserId,
         private Datetime $createdAt,
-        private Datetime $updatedAt,
-        private ?UserId $createUserId
+        private Datetime $updatedAt
     ) {
     }
 
@@ -50,14 +49,14 @@ class User extends Entity
         return $this->name;
     }
 
-    public function roleId(): RoleId
-    {
-        return $this->roleId;
-    }
-
     public function status(): UserStatus
     {
         return $this->status;
+    }
+
+    public function roleId(): RoleId
+    {
+        return $this->roleId;
     }
 
     public function email(): Email
@@ -68,11 +67,6 @@ class User extends Entity
     public function emailVeifiedAt(): Datetime
     {
         return $this->emailVeifiedAt;
-    }
-
-    public function battleMetricsId(): string
-    {
-        return $this->battleMetricsId;
     }
 
     public function discordId(): string
@@ -100,6 +94,11 @@ class User extends Entity
         return $this->description;
     }
 
+    public function createUserId(): ?UserId
+    {
+        return $this->createUserId;
+    }
+
     public function createdAt(): Datetime
     {
         return $this->createdAt;
@@ -108,10 +107,5 @@ class User extends Entity
     public function updatedAt(): Datetime
     {
         return $this->updatedAt;
-    }
-
-    public function createUserId(): ?UserId
-    {
-        return $this->createUserId;
     }
 }

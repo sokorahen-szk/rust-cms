@@ -36,7 +36,6 @@ return new class () extends Migration {
             $table->uuid("role_id", 36)->comment("ロールID");
             $table->string("email")->unique()->nullable()->comment("メールアドレス");
             $table->timestamp("email_verified_at")->nullable()->comment("メールアドレス有効化日時");
-            $table->string("battle_metrics_id")->nullable()->comment("BattleMetricsID");
             $table->string("discord_id")->nullable()->comment("DiscordID");
             $table->string("twitter_id")->nullable()->comment("TwitterID");
             $table->string("steam_id")->nullable()->comment("SteamID");

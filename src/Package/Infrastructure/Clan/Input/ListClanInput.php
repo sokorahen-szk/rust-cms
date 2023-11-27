@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Package\Infrastructure\Input;
+namespace Package\Infrastructure\Clan\Input;
 
 class ListClanInput
 {

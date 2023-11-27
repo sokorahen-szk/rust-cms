@@ -6,7 +6,7 @@ namespace Package\Domain\Clan\Repository;
 
 use Package\Domain\Clan\Entity\Clan;
 use Package\Domain\Clan\ValueObject\ClanId;
-use Package\Infrastructure\Input\ListClanInput;
+use Package\Infrastructure\Clan\Input\ListClanInput;
 
 interface IClanRepository
 {

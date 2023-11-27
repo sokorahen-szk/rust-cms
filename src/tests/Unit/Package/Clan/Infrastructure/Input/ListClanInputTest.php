@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\Unit\Package\Infrastructure\Input;
+namespace Tests\Unit\Package\Infrastructure\Clan\Input;
 
-use Package\Infrastructure\Input\ListClanInput;
+use Package\Infrastructure\Clan\Input\ListClanInput;
 
 test("idsが設定できること", function () {
     $input = new ListClanInput([1, 2, 3]);

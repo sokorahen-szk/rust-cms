@@ -5,7 +5,7 @@ namespace Package\Usecase\Clan;
 use Package\Domain\Clan\Entity\ClanFactory;
 use Package\Domain\Clan\Repository\IClanRepository;
 use Package\Domain\Clan\ValueObject\ClanId;
-use Package\Infrastructure\Input\ListClanInput;
+use Package\Infrastructure\Clan\Input\ListClanInput;
 use Package\Usecase\Clan\Command\CreateClanCommand;
 use Package\Usecase\Clan\Command\GetClanCommand;
 use Package\Usecase\Clan\Command\ListClanCommand;

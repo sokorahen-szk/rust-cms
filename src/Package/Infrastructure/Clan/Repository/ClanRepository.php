@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Package\Infrastructure\Repository;
+namespace Package\Infrastructure\Clan\Repository;
 
 use Package\Domain\Clan\Repository\IClanRepository;
 use Package\Domain\Clan\Entity\Clan;
@@ -10,7 +10,7 @@ use Package\Domain\Clan\ValueObject\ClanId;
 use Package\Domain\Clan\ValueObject\ClanName;
 use Package\Domain\Shared\ValueObject\Datetime;
 use App\Models\ClanModel;
-use Package\Infrastructure\Input\ListClanInput;
+use Package\Infrastructure\Clan\Input\ListClanInput;
 use Illuminate\Database\Eloquent\Collection;
 use Package\Domain\Clan\ValueObject\ImageUrl;
 use Package\Domain\Clan\ValueObject\Introduction;
@@ -61,6 +61,8 @@ class ClanRepository implements IClanRepository
             "image_url" => $clan->imageUrl()->value(),
             "introduction" => $clan->introduction()->value(),
             "created_user_id" => $clan->createdUserId()->value(),
+            "updated_at" => $clan->updatedAt()->toDateTimeString(),
+            "created_at" => $clan->createdAt()->toDateTimeString(),
         ]);
     }
 

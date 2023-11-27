@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ClanController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\AuthController;
 
 /*
@@ -16,6 +17,7 @@ use App\Http\Controllers\AuthController;
 */
 
 Route::middleware(["api"])->resource("clans", ClanController::class);
+Route::middleware(["api"])->resource("users", UserController::class);
 
 Route::group([
     "middleware" => "api",

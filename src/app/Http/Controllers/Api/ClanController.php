@@ -20,6 +20,7 @@ class ClanController extends Controller
     {
         $this->middleware("auth:api", ["except" => ["index", "show"]]);
     }
+
     /**
      * @param Request $request
      * @param IClanInteractor $interactor
