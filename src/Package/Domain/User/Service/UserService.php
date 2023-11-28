@@ -19,6 +19,7 @@ class UserService {
     public function register()
     {
         // ユーザ作成
-        // 
+        // プレイヤー作成
+        // タグ作成
     }
 }
