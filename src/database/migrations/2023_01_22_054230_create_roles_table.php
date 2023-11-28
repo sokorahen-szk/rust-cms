@@ -29,8 +29,14 @@ return new class () extends Migration {
             // 例えば、ユーザ作成とプレイヤー作成の画面があるとする。
             // ユーザ作成 (00)2 プレイヤー作成 (00)2 の場合、権限レベルは(0000)2 (0)16となる。
             // ユーザ作成 (01)2 プレイヤー作成 (11)2 の場合、権限レベルは(0111)2 (7)16となる。
-            $table->integer("permission_level")->comment("権限レベル");
+            $table->string("permission_level")->comment("権限レベル");
+
+            // 1つのoermissionに対して、DEFAULT設定は1つのみ適用可能。
+            // permission=MEMBERのDEFAULTされたレコードがユーザ作成時にデフォルト権限として設定される。
+            $table->enum("default_permission", ["DEFAULT"])->nullable()->comment("デフォルト設定");
             $table->string("description")->nullable()->comment("備考");
+
+            $table->unique(['permission', 'default_permission']);
         });
     }
 

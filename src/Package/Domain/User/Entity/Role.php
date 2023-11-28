@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Package\Domain\User\Entity;
 
 use Package\Domain\Shared\BaseEntity as Entity;
+use Package\Domain\User\ValueObject\DefaultPermission;
 use Package\Domain\User\ValueObject\RoleId;
 use Package\Domain\User\ValueObject\Permission;
 use Package\Domain\User\ValueObject\PermissionLevel;
@@ -17,6 +18,7 @@ class Role extends Entity
         private RoleName $name,
         private Permission $permission,
         private PermissionLevel $permissionLevel,
+        private DefaultPermission $defaultPermission,
         private string $description
     ) {
     }
@@ -39,6 +41,11 @@ class Role extends Entity
     public function permissionLevel(): PermissionLevel
     {
         return $this->permissionLevel;
+    }
+
+    public function defaultPermission(): DefaultPermission
+    {
+        return $this->defaultPermission;
     }
 
     public function description(): string
