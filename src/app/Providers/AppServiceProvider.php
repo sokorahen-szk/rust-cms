@@ -17,6 +17,10 @@ class AppServiceProvider extends ServiceProvider
             \Package\Usecase\Clan\IClanInteractor::class,
             \Package\Usecase\Clan\ClanInteractor::class
         );
+        $this->app->bind(
+            \Package\Usecase\User\IUserInteractor::class,
+            \Package\Usecase\User\UserInteractor::class
+        );
     }
 
     /**

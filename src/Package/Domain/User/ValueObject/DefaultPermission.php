@@ -4,7 +4,7 @@ namespace Package\Domain\User\ValueObject;
 
 class DefaultPermission
 {
-    private const DEFAULT_PERMISSION_KEY = "DEFAULT";
+    public const DEFAULT_PERMISSION_KEY = "DEFAULT";
 
     public function __construct(private string $value)
     {

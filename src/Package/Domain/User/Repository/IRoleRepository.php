@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Package\Domain\User\Repository;
 
 use Package\Domain\User\Entity\Role;
-use Package\Infrastructure\Role\Input\ListRoleInput;
+use Package\Domain\User\ValueObject\Permission;
 
 interface IRoleRepository
 {
     /**
-     * @param ListRoleInput $input
-     * @return Role[]
+     * @param Permission $permission
+     * @return Role
      */
-    public function list(ListRoleInput $input): array;
+    public function getByDefaultPermission(Permission $permission): Role;
 }

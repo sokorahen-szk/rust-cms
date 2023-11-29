@@ -22,7 +22,7 @@ class User extends Entity
         private UserStatus $status,
         private RoleId $roleId,
         private Email $email,
-        private Datetime $emailVeifiedAt,
+        private ?Datetime $emailVeifiedAt,
         private string $discordId,
         private string $twitterId,
         private string $steamId,

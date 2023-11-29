@@ -18,16 +18,14 @@ class UserFactory
     public function __construct(
         private string $accountId,
         private string $name,
-        private string $clanId,
         private string $roleId,
         private string $email,
-        private string $emailVerifiedAt,
         private string $discordId,
         private string $twitterId,
         private string $steamId,
         private string $password,
         private string $description,
-        private string $userId,
+        private ?string $createdUserId,
     ) {
     }
 
@@ -45,13 +43,13 @@ class UserFactory
             new UserStatus(UserStatus::ACTIVE),
             new RoleId($this->roleId),
             new Email($this->email),
-            new Datetime($this->emailVerifiedAt),
+            null,
             $this->discordId,
             $this->twitterId,
             $this->steamId,
             new Password($this->password),
             $this->description,
-            new UserId($this->userId),
+            $this->createdUserId ?? new UserId($this->createdUserId),
             new Datetime($now),
             new Datetime($now)
         );

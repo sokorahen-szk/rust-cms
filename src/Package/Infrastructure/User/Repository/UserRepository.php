@@ -23,6 +23,10 @@ class UserRepository implements IUserRepository {
     public function __construct(private UserModel $userModel)
     {
     }
+
+    /**
+     * @inheritDoc
+     */
     public function get(UserId $id): User
     {
         $model = $this->userModel->findOrFail($id->value());
@@ -30,7 +34,7 @@ class UserRepository implements IUserRepository {
     }
 
     /**
-     * @return User[]
+     * @inheritDoc
      */
     public function list(ListUserInput $input): array
     {
@@ -39,6 +43,9 @@ class UserRepository implements IUserRepository {
         return $this->toUsers($models);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function create(User $user): User
     {
         $model = $this->userModel->create([
