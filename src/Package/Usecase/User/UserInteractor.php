@@ -2,7 +2,6 @@
 
 namespace Package\Usecase\User;
 
-use Package\Domain\User\Repository\IUserRepository;
 use Package\Domain\User\Service\IUserService;
 use Package\Usecase\User\Command\CreateUserCommand;
 

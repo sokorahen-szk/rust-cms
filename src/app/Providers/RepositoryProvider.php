@@ -18,12 +18,16 @@ class RepositoryProvider extends ServiceProvider
             \Package\Infrastructure\Clan\Repository\ClanRepository::class
         );
         $this->app->bind(
-            \Package\Domain\Plyaer\Repository\IPlayerRepository::class,
-            \Package\Infrastructure\Plyaer\Repository\PlayerRepository::class
+            \Package\Domain\Player\Repository\IPlayerRepository::class,
+            \Package\Infrastructure\Player\Repository\PlayerRepository::class
         );
         $this->app->bind(
             \Package\Domain\User\Repository\IUserRepository::class,
             \Package\Infrastructure\User\Repository\UserRepository::class
+        );
+        $this->app->bind(
+            \Package\Domain\User\Repository\IRoleRepository::class,
+            \Package\Infrastructure\User\Repository\RoleRepository::class
         );
     }
 

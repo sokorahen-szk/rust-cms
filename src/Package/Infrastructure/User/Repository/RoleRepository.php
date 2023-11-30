@@ -6,6 +6,7 @@ namespace Package\Infrastructure\User\Repository;
 
 use Package\Domain\User\Repository\IRoleRepository;
 use App\Models\RoleModel;
+use App\Exceptions\NotFoundRecordException;
 use Package\Domain\User\ValueObject\Permission;
 use Package\Domain\User\Entity\Role;
 use Package\Domain\User\ValueObject\DefaultPermission;
@@ -27,9 +28,13 @@ class RoleRepository implements IRoleRepository {
     public function getByDefaultPermission(Permission $permission): Role
     {
         $model = $this->roleModel
-            ->where("permission_level",  $permission->value())
+            ->where("permission",  $permission->value())
             ->where("default_permission", DefaultPermission::DEFAULT_PERMISSION_KEY)
-            ->firstOrFail();
+            ->first();
+
+        if (is_null($model)) {
+            throw new NotFoundRecordException("no role record");
+        }
         return $this->toRole($model);
     }
 
@@ -45,7 +50,7 @@ class RoleRepository implements IRoleRepository {
             new Permission($roleModel->permission),
             new PermissionLevel($roleModel->permission_level),
             new DefaultPermission($roleModel->default_permission),
-            $roleModel->description,
+            $roleModel->description
         );
     }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Package\Infrastructure\Role\Input;
+namespace Package\Infrastructure\User\Input;
 use Package\Domain\User\ValueObject\Permission;
 
 class ListRoleInput

@@ -18,8 +18,8 @@ class Role extends Entity
         private RoleName $name,
         private Permission $permission,
         private PermissionLevel $permissionLevel,
-        private DefaultPermission $defaultPermission,
-        private string $description
+        private ?DefaultPermission $defaultPermission,
+        private ?string $description
     ) {
     }
 
@@ -43,12 +43,12 @@ class Role extends Entity
         return $this->permissionLevel;
     }
 
-    public function defaultPermission(): DefaultPermission
+    public function defaultPermission(): ?DefaultPermission
     {
         return $this->defaultPermission;
     }
 
-    public function description(): string
+    public function description(): ?string
     {
         return $this->description;
     }

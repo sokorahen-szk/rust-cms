@@ -21,13 +21,13 @@ class User extends Entity
         private string $name,
         private UserStatus $status,
         private RoleId $roleId,
-        private Email $email,
+        private ?Email $email,
         private ?Datetime $emailVeifiedAt,
-        private string $discordId,
-        private string $twitterId,
-        private string $steamId,
+        private ?string $discordId,
+        private ?string $twitterId,
+        private ?string $steamId,
         private Password $password,
-        private string $description,
+        private ?string $description,
         private ?UserId $createUserId,
         private Datetime $createdAt,
         private Datetime $updatedAt
@@ -59,27 +59,27 @@ class User extends Entity
         return $this->roleId;
     }
 
-    public function email(): Email
+    public function email(): ?Email
     {
         return $this->email;
     }
 
-    public function emailVeifiedAt(): Datetime
+    public function emailVeifiedAt(): ?Datetime
     {
         return $this->emailVeifiedAt;
     }
 
-    public function discordId(): string
+    public function discordId(): ?string
     {
         return $this->discordId;
     }
 
-    public function twitterId(): string
+    public function twitterId(): ?string
     {
         return $this->twitterId;
     }
 
-    public function steamId(): string
+    public function steamId(): ?string
     {
         return $this->steamId;
     }
@@ -89,7 +89,7 @@ class User extends Entity
         return $this->password;
     }
 
-    public function description(): string
+    public function description(): ?string
     {
         return $this->description;
     }

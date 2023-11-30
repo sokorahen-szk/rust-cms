@@ -54,14 +54,14 @@ class UserRepository implements IUserRepository {
             "name" => $user->name(),
             "status" => $user->status()->value(),
             "role_id" => $user->roleId()->value(),
-            "email" => $user->email()->value(),
-            "email_verified_at" => $user->emailVeifiedAt()->toDateTimeString(),
+            "email" => $user->email() ? $user->email()->value() : null,
+            "email_verified_at" => $user->emailVeifiedAt() ? $user->emailVeifiedAt()->toDateTimeString() : null,
             "discord_id" => $user->discordId(),
             "twitter_id" => $user->twitterId(),
             "steam_id" => $user->steamId(),
             "password" => $user->password()->hashedText(),
             "description" => $user->description(),
-            "created_user_id" => $user->createUserId()->value(),
+            "created_user_id" => $user->createUserId() ? $user->createUserId()->value() : null,
             "created_at" => $user->createdAt()->toDateTimeString(),
             "updated_at" => $user->updatedAt()->toDateTimeString(),
         ]);
@@ -87,20 +87,33 @@ class UserRepository implements IUserRepository {
     {
         return new User(
             new UserId($model->id),
-            new AccountId($model->accound_id),
+            new AccountId($model->account_id),
             $model->name,
             new UserStatus($model->status),
             new RoleId($model->role_id),
-            new Email($model->email),
-            new Datetime($model->email_verified_at),
+            new Email($model->email) ? $model->email : null,
+            new Datetime($model->email_verified_at) ? $model->email_verified_at : null,
             $model->discord_id,
             $model->twitter_id,
             $model->steam_id,
             new Password($model->password),
             $model->description,
-            new UserId($model->user_id),
+            new UserId($model->created_user_id) ? $model->created_user_id : null,
             new Datetime($model->created_at),
             new Datetime($model->updated_at)
         );
+    }
+
+    /**
+     * @param mixed $data
+     * @return mixed
+     */
+    private function convert($data): mixed
+    {
+        if (issert($data)) {
+            return $data;
+        }
+
+        return null;
     }
 }

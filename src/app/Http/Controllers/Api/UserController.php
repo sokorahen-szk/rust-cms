@@ -30,6 +30,7 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  UserCreateRequest  $request
+     * @param  IUserInteractor $interactor
      * @return \Illuminate\Http\Response
      */
     public function store(UserCreateRequest $request, IUserInteractor $interactor)
@@ -42,16 +43,16 @@ class UserController extends Controller
         $interactor->create(new CreateUserCommand(
             $request->account_id,
             $request->name,
-            $request->input("email", ""),
-            $request->input("discord_id", ""),
-            $request->input("twitter_id", ""),
-            $request->input("steam_id", ""),
-            $request->input("battle_metrics_id", ""),
+            $request->input("email", null),
+            $request->input("discord_id", null),
+            $request->input("twitter_id", null),
+            $request->input("steam_id", null),
+            $request->input("battle_metrics_id", null),
             $request->password,
-            $request->input("description", "")
+            $request->input("description", null)
         ));
 
-        var_dump("A");
+        return response()->json([]);
     }
 
     /**
