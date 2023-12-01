@@ -11,6 +11,7 @@ use Package\Domain\User\ValueObject\Permission;
 use Package\Domain\User\Repository\IUserRepository;
 use Package\Usecase\User\Command\CreateUserCommand;
 use Illuminate\Support\Facades\DB;
+use Package\Domain\Player\Entity\PlayerFactory;
 
 class UserService implements IUserService{
     public function __construct(
@@ -43,7 +44,24 @@ class UserService implements IUserService{
                 $createUserCommand->description,
                 null
             );
-            $createdUser = $this->userRepository->create($userFactory->makeGeneralUser());
+
+            $beforeCreationUser = $userFactory->makeGeneralUser();
+            if (is_null($createUserCommand->email)) {
+                $beforeCreationUser = $userFactory->makeGeneralUserWithNotSetEmail();
+
+                // ここで認証用のメールトークンを発行する処理
+                // メール送信　非同期
+            }
+
+            $createdUser = $this->userRepository->create($beforeCreationUser);
+
+            $playerFactory = new PlayerFactory(
+                $createUserCommand->name,
+                $createUserCommand->clanId,
+                $createUserCommand->battleMetricsId,
+                $createdUser->id()->value()
+            );
+            $this->playerRepository->create($playerFactory->make());
         });
     }
 }

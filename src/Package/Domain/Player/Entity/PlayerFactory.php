@@ -15,8 +15,8 @@ class PlayerFactory
 {
     public function __construct(
         private string $name,
-        private string $clanId,
-        private string $battleMetricsId,
+        private ?string $clanId,
+        private ?string $battleMetricsId,
         private string $createdUserId,
     ) {
     }
@@ -31,7 +31,7 @@ class PlayerFactory
         return new Player(
             new PlayerId($id),
             new PlayerName($this->name),
-            new ClanId($this->clanId),
+            $this->clanId ? new ClanId($this->clanId) : null,
             $this->battleMetricsId,
             new UserId($this->createdUserId),
             new Datetime($now),

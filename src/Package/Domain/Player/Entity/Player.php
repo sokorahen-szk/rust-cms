@@ -17,8 +17,8 @@ class Player extends Entity
         private PlayerId $id,
         private PlayerName $name,
         private ?ClanId $clanId,
-        private string $battleMetricsId,
-        private ?UserId $createdUserId,
+        private ?string $battleMetricsId,
+        private UserId $createdUserId,
         private Datetime $createdAt,
         private Datetime $updatedAt
     )
@@ -41,12 +41,12 @@ class Player extends Entity
         return $this->clanId;
     }
 
-    public function battleMetricsId(): string
+    public function battleMetricsId(): ?string
     {
         return $this->battleMetricsId;
     }
 
-    public function createdUserId(): ?UserId
+    public function createdUserId(): UserId
     {
         return $this->createdUserId;
     }

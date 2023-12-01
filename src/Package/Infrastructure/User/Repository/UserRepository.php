@@ -103,17 +103,4 @@ class UserRepository implements IUserRepository {
             new Datetime($model->updated_at)
         );
     }
-
-    /**
-     * @param mixed $data
-     * @return mixed
-     */
-    private function convert($data): mixed
-    {
-        if (issert($data)) {
-            return $data;
-        }
-
-        return null;
-    }
 }

@@ -9,7 +9,7 @@ use Package\Domain\Player\Entity\Player;
 interface IPlayerRepository {
     /**
      * @param Player $player
-     * @return void
+     * @return Player
      */
-    public function create(Player $player): void;
+    public function create(Player $player): Player;
 }

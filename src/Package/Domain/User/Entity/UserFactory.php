@@ -30,10 +30,7 @@ class UserFactory
     ) {
     }
 
-    /**
-     * @return User
-     */
-    public function makeGeneralUser(): User
+    private function make(UserStatus $userStatus): User
     {
         $id = (string) Str::uuid();
         $now = now();
@@ -43,7 +40,7 @@ class UserFactory
             new UserId($id),
             new AccountId($this->accountId),
             $this->name,
-            new UserStatus(UserStatus::ACTIVE),
+            $userStatus,
             new RoleId($this->roleId),
             $this->email ? new Email($this->email) : null,
             null,
@@ -56,5 +53,21 @@ class UserFactory
             new Datetime($now),
             new Datetime($now)
         );
+    }
+
+    /**
+     * @return User
+     */
+    public function makeGeneralUserWithNotSetEmail(): User
+    {
+        return $this->make(new UserStatus(UserStatus::WAITING));
+    }
+
+    /**
+     * @return User
+     */
+    public function makeGeneralUser(): User
+    {
+        return $this->make(new UserStatus(UserStatus::ACTIVE));
     }
 }
