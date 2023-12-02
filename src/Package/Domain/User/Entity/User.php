@@ -108,4 +108,9 @@ class User extends Entity
     {
         return $this->updatedAt;
     }
+
+    public function isEmail(): bool
+    {
+        return !is_null($this->email);
+    }
 }

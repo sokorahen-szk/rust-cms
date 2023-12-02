@@ -16,7 +16,8 @@ class CreateUserCommand
         public ?string $battleMetricsId,
         public string $password,
         public ?string $description,
-        public ?string $clanId
+        public ?string $clanId,
+        public ?string $createdUser
     )
     {
     }

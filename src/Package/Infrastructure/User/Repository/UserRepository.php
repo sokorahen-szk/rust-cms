@@ -91,14 +91,14 @@ class UserRepository implements IUserRepository {
             $model->name,
             new UserStatus($model->status),
             new RoleId($model->role_id),
-            new Email($model->email) ? $model->email : null,
-            new Datetime($model->email_verified_at) ? $model->email_verified_at : null,
+            $model->email ? new Email($model->email) : null,
+            $model->email_verified_at ? new Datetime($model->email_verified_at) : null,
             $model->discord_id,
             $model->twitter_id,
             $model->steam_id,
             new Password($model->password),
             $model->description,
-            new UserId($model->created_user_id) ? $model->created_user_id : null,
+            $model->created_user_id ? new UserId($model->created_user_id) : null,
             new Datetime($model->created_at),
             new Datetime($model->updated_at)
         );

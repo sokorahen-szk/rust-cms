@@ -50,7 +50,8 @@ class UserController extends Controller
             $request->input("battle_metrics_id", null),
             $request->password,
             $request->input("description", null),
-            $request->input("clan_id", null)
+            $request->input("clan_id", null),
+            null
         ));
 
         return response()->json([]);

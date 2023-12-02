@@ -29,6 +29,10 @@ class RepositoryProvider extends ServiceProvider
             \Package\Domain\User\Repository\IRoleRepository::class,
             \Package\Infrastructure\User\Repository\RoleRepository::class
         );
+        $this->app->bind(
+            \Package\Domain\User\Repository\IUserEmailVerifyTokenRepository::class,
+            \Package\Infrastructure\User\Repository\UserEmailVerifyTokenRepository::class
+        );
     }
 
     /**

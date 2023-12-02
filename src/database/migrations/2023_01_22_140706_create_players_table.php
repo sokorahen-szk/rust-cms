@@ -16,7 +16,7 @@ return new class () extends Migration {
             $table->uuid("id", 36)->primary()->comment("プレイヤーID");
             $table->string("name")->comment("プレイヤー活動名");
             $table->uuid("clan_id", 36)->nullable()->comment("クランID");
-            $table->integer("battle_metrics_id")->comment("BattleMetricsID");
+            $table->integer("battle_metrics_id")->nullable()->comment("BattleMetricsID");
             $table->uuid("created_user_id", 36)->comment("作成ユーザID");
             $table->timestamps();
 

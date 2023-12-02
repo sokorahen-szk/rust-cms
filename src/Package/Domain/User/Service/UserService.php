@@ -12,12 +12,16 @@ use Package\Domain\User\Repository\IUserRepository;
 use Package\Usecase\User\Command\CreateUserCommand;
 use Illuminate\Support\Facades\DB;
 use Package\Domain\Player\Entity\PlayerFactory;
+use Package\Domain\User\Entity\UserEmailVerifyTokenFactory;
+use Package\Domain\User\Repository\IUserEmailVerifyTokenRepository;
+use App\Mail\SendMail;
 
 class UserService implements IUserService{
     public function __construct(
         private IUserRepository $userRepository,
         private IPlayerRepository $playerRepository,
-        private IRoleRepository $roleRepository
+        private IRoleRepository $roleRepository,
+        private IUserEmailVerifyTokenRepository $userEmailVerifyTokenRepository
     )
     {
     }
@@ -42,18 +46,20 @@ class UserService implements IUserService{
                 $createUserCommand->steamId,
                 $createUserCommand->password,
                 $createUserCommand->description,
-                null
+                $createUserCommand->createdUser,
             );
 
             $beforeCreationUser = $userFactory->makeGeneralUser();
             if (is_null($createUserCommand->email)) {
                 $beforeCreationUser = $userFactory->makeGeneralUserWithNotSetEmail();
-
-                // ここで認証用のメールトークンを発行する処理
-                // メール送信　非同期
             }
 
             $createdUser = $this->userRepository->create($beforeCreationUser);
+
+            if ($createdUser->isEmail()) {
+                $userEmailVerifyTokenFactory = new UserEmailVerifyTokenFactory($beforeCreationUser->id()->value());
+                $this->userEmailVerifyTokenRepository->create($userEmailVerifyTokenFactory->make());
+            }
 
             $playerFactory = new PlayerFactory(
                 $createUserCommand->name,
@@ -62,6 +68,9 @@ class UserService implements IUserService{
                 $createdUser->id()->value()
             );
             $this->playerRepository->create($playerFactory->make());
+
+
+            throw new \Exception("end");
         });
     }
 }
