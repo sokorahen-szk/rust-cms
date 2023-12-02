@@ -47,12 +47,24 @@ class UserEmailVerifyTokenRepository implements IUserEmailVerifyTokenRepository 
         return $this->toUserEmailVerifyToken($model);
     }
 
+    public function update(UserEmailVerifyToken $userEmailVerifyToken): void
+    {
+        $updateFlag = $this->model->where("id", $userEmailVerifyToken->id()->value())
+            ->update([
+                // TODO
+            ]);
+
+        if (!(bool) $updateFlag) {
+            throw new \Exception("failed to update user_email_verify_token.");
+        }
+    }
+
     private function toUserEmailVerifyToken(UserEmailVerifyTokenModel $model): UserEmailVerifyToken
     {
         return new UserEmailVerifyToken(
             new UserEmailVerifyTokenId($model->id),
             new UserId($model->user_id),
-            $$model->verified,
+            $model->verified,
             $model->expires_at ? new Datetime($model->expires_at) : null,
         );
     }

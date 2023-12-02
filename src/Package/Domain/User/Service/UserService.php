@@ -14,7 +14,10 @@ use Illuminate\Support\Facades\DB;
 use Package\Domain\Player\Entity\PlayerFactory;
 use Package\Domain\User\Entity\UserEmailVerifyTokenFactory;
 use Package\Domain\User\Repository\IUserEmailVerifyTokenRepository;
-use App\Mail\SendMail;
+use App\Mail\RegisterEmail;
+use Illuminate\Support\Facades\Mail;
+use Package\Domain\Shared\ValueObject\Datetime;
+use Package\Domain\User\ValueObject\UserEmailVerifyTokenId;
 
 class UserService implements IUserService{
     public function __construct(
@@ -69,8 +72,25 @@ class UserService implements IUserService{
             );
             $this->playerRepository->create($playerFactory->make());
 
-
+            if ($createdUser->isEmail()) {
+                Mail::to($createdUser->email()->value())->send(new RegisterEmail());
+            }
+    
             throw new \Exception("end");
+        });
+    }
+
+    public function verifyEmail(UserEmailVerifyTokenId $userEmailVerifyTokenId): void
+    {
+        DB::transaction(function() use ($userEmailVerifyTokenId) {
+            $userEmailVerifyToken = $this->userEmailVerifyTokenRepository->get($userEmailVerifyTokenId);
+            $user = $this->userRepository->get($userEmailVerifyToken->userId());
+
+            $user->changeEmailVeifiedAt(new Datetime(now()));
+            $this->userRepository->update($user);
+
+            $userEmailVerifyToken->changeVerified(true);
+            $this->userEmailVerifyTokenRepository->update($userEmailVerifyToken);
         });
     }
 }

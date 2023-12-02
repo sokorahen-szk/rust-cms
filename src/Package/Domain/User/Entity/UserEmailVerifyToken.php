@@ -36,6 +36,11 @@ class UserEmailVerifyToken extends Entity
         return $this->verified;
     }
 
+    public function changeVerified(bool $verified): void
+    {
+        $this->verified = $verified;
+    }
+
     public function expiresAt(): Datetime
     {
         return $this->expiresAt;

@@ -69,6 +69,11 @@ class User extends Entity
         return $this->emailVeifiedAt;
     }
 
+    public function changeEmailVeifiedAt(Datetime $datetime): void
+    {
+        $this->emailVeifiedAt = $datetime;
+    }
+
     public function discordId(): ?string
     {
         return $this->discordId;

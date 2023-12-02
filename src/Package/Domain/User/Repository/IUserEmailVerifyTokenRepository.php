@@ -20,4 +20,10 @@ interface IUserEmailVerifyTokenRepository
      * @return UserEmailVerifyToken
      */
     public function get(UserEmailVerifyTokenId $id): UserEmailVerifyToken;
+
+    /**
+     * @param UserEmailVerifyToken $userEmailVerifyToken
+     * @return void
+     */
+    public function update(UserEmailVerifyToken $userEmailVerifyToken): void;
 }

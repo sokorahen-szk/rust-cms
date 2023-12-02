@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +19,9 @@ Route::get("/", function() {
     return view("index");
 })->name("index");
 
-Route::get("/login", function() {
-    return view("login");
-})->name("login");
+Route::prefix("register")->group(function() {
+    Route::get("/", function() {
+        return "TODO";
+    });
+    Route::get("/{token}", [UserController::class, "verifyEmail"]);
+});

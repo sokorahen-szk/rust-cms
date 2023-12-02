@@ -69,6 +69,21 @@ class UserRepository implements IUserRepository {
     }
 
     /**
+     * @param User $user
+     */
+    public function update(User $user): void
+    {
+        $updateFlag = $this->userModel->where("id", $user->id()->value())
+            ->update([
+                // TODO
+            ]);
+
+        if (!(bool) $updateFlag) {
+            throw new \Exception("failed to update user.");
+        }
+    }
+
+    /**
      * @param Collection $models
      * @return User[]
      */
