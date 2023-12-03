@@ -10,7 +10,7 @@ use Package\Domain\Shared\ValueObject\Datetime;
 use Package\Domain\User\Entity\UserEmailVerifyToken;
 use Package\Domain\User\ValueObject\UserEmailVerifyTokenId;
 use Package\Domain\User\ValueObject\UserId;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use App\Exceptions\NotFoundRecordException;
 
 class UserEmailVerifyTokenRepository implements IUserEmailVerifyTokenRepository {
     public function __construct(private UserEmailVerifyTokenModel $model)
@@ -26,7 +26,7 @@ class UserEmailVerifyTokenRepository implements IUserEmailVerifyTokenRepository 
         $model = $this->model->where("id", $id->value())->first();
 
         if (is_null($model)) {
-            throw new NotFoundHttpException("no user_email_verify_token record");
+            throw new NotFoundRecordException("no user_email_verify_token record");
         }
 
         return $this->toUserEmailVerifyToken($model);
@@ -51,7 +51,8 @@ class UserEmailVerifyTokenRepository implements IUserEmailVerifyTokenRepository 
     {
         $updateFlag = $this->model->where("id", $userEmailVerifyToken->id()->value())
             ->update([
-                // TODO
+                "verified" => $userEmailVerifyToken->verified(),
+                "expires_at" => $userEmailVerifyToken->expiresAt()->toDateTimeString(),
             ]);
 
         if (!(bool) $updateFlag) {
@@ -64,7 +65,7 @@ class UserEmailVerifyTokenRepository implements IUserEmailVerifyTokenRepository 
         return new UserEmailVerifyToken(
             new UserEmailVerifyTokenId($model->id),
             new UserId($model->user_id),
-            $model->verified,
+            (bool) $model->verified,
             $model->expires_at ? new Datetime($model->expires_at) : null,
         );
     }

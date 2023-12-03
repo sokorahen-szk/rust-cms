@@ -8,6 +8,9 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Package\Domain\User\Entity\User;
+use Package\Domain\User\Entity\UserEmailVerifyToken;
+use Illuminate\Mail\Mailables\Address;
 
 class RegisterEmail extends Mailable
 {
@@ -18,9 +21,8 @@ class RegisterEmail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(private User $user, private UserEmailVerifyToken $userEmailVerifyToken)
     {
-        //
     }
 
     /**
@@ -31,6 +33,9 @@ class RegisterEmail extends Mailable
     public function envelope()
     {
         return new Envelope(
+            from: new Address(
+                config("mail.from.address"),
+                config("app.name") . config("mail.from.name")),
             subject: "新規登録のお知らせ",
         );
     }
@@ -43,7 +48,13 @@ class RegisterEmail extends Mailable
     public function content()
     {
         return new Content(
-            markdown: "mails.register",
+            view: "mails.register",
+            with: [
+                "accountId" => $this->user->accountId()->value(),
+                "appTitle" => config("app.name"),
+                "verifyEmail" => route("register.token", ["token" => $this->userEmailVerifyToken->id()->value()]),
+                "verifyExpiresMinutes" => 30,
+            ]
         );
     }
 

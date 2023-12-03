@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Package\Domain\User\Service;
 
+use App\Exceptions\AlreadyVerifiedException;
 use Package\Domain\User\Entity\UserFactory;
 use Package\Domain\Player\Repository\IPlayerRepository;
 use Package\Domain\User\Repository\IRoleRepository;
@@ -20,6 +21,13 @@ use Package\Domain\Shared\ValueObject\Datetime;
 use Package\Domain\User\ValueObject\UserEmailVerifyTokenId;
 
 class UserService implements IUserService{
+
+    const USER_SERVICE_REGISTER_COMPLETED = 1;
+    const USER_SERVICE_REGISTER_COMPLETED_TEXT = "completed";
+
+    const USER_SERVICE_REGISTER_WAITING_FOR_EMAIL_VERIFY = 2;
+    const USER_SERVICE_REGISTER_WAITING_FOR_EMAIL_VERIFY_TEXT = "waiting_for_email_verify";
+
     public function __construct(
         private IUserRepository $userRepository,
         private IPlayerRepository $playerRepository,
@@ -34,9 +42,9 @@ class UserService implements IUserService{
      */
     public function register(
         CreateUserCommand $createUserCommand
-    ): void
+    ): int
     {
-        DB::transaction(function() use ($createUserCommand) {
+        return DB::transaction(function() use ($createUserCommand) {
             $role = $this->roleRepository->getByDefaultPermission(new Permission(Permission::MEMBER));
 
             $userFactory = new UserFactory(
@@ -61,7 +69,7 @@ class UserService implements IUserService{
 
             if ($createdUser->isEmail()) {
                 $userEmailVerifyTokenFactory = new UserEmailVerifyTokenFactory($beforeCreationUser->id()->value());
-                $this->userEmailVerifyTokenRepository->create($userEmailVerifyTokenFactory->make());
+                $createdUserEmailVerifyToken = $this->userEmailVerifyTokenRepository->create($userEmailVerifyTokenFactory->make());
             }
 
             $playerFactory = new PlayerFactory(
@@ -73,10 +81,12 @@ class UserService implements IUserService{
             $this->playerRepository->create($playerFactory->make());
 
             if ($createdUser->isEmail()) {
-                Mail::to($createdUser->email()->value())->send(new RegisterEmail());
+                Mail::to($createdUser->email()->value())->send(new RegisterEmail($createdUser, $createdUserEmailVerifyToken));
+
+                return self::USER_SERVICE_REGISTER_WAITING_FOR_EMAIL_VERIFY;
             }
     
-            throw new \Exception("end");
+            return self::USER_SERVICE_REGISTER_COMPLETED;
         });
     }
 
@@ -84,8 +94,18 @@ class UserService implements IUserService{
     {
         DB::transaction(function() use ($userEmailVerifyTokenId) {
             $userEmailVerifyToken = $this->userEmailVerifyTokenRepository->get($userEmailVerifyTokenId);
-            $user = $this->userRepository->get($userEmailVerifyToken->userId());
 
+            if ($userEmailVerifyToken->verified()) {
+                throw new AlreadyVerifiedException("既に認証済みメールアドレスです。");
+            }
+
+            if ($userEmailVerifyToken->expiresAt()->lt(now())) {
+                throw new AlreadyVerifiedException("認証有効期限が切れています。");
+            }
+
+            $user = $this->userRepository->get($userEmailVerifyToken->userId());
+            $changeActiveStatus = $user->status()->changeActive();
+            $user->changeStatus($changeActiveStatus);
             $user->changeEmailVeifiedAt(new Datetime(now()));
             $this->userRepository->update($user);
 

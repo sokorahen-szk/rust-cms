@@ -10,9 +10,9 @@ use Package\Usecase\User\Command\CreateUserCommand;
 interface IUserService {
     /**
      * @param CreateUserCommand $createUserCommand
-     * @return void
+     * @return int
      */
-    public function register(CreateUserCommand $createUserCommand): void;
+    public function register(CreateUserCommand $createUserCommand): int;
 
     /**
      * @param UserEmailVerifyTokenId $userEmailVerifyTokenId

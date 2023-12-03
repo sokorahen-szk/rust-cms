@@ -54,6 +54,11 @@ class User extends Entity
         return $this->status;
     }
 
+    public function changeStatus(UserStatus $status): void
+    {
+        $this->status = $status;
+    }
+
     public function roleId(): RoleId
     {
         return $this->roleId;

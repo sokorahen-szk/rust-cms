@@ -40,7 +40,7 @@ class UserController extends Controller
             return response()->json($validator->getMessageBag(), Response::HTTP_BAD_REQUEST);
         }
 
-        $interactor->create(new CreateUserCommand(
+        return response()->json($interactor->create(new CreateUserCommand(
             $request->account_id,
             $request->name,
             $request->input("email", null),
@@ -52,9 +52,7 @@ class UserController extends Controller
             $request->input("description", null),
             $request->input("clan_id", null),
             null
-        ));
-
-        return response()->json([]);
+        )));
     }
 
     /**

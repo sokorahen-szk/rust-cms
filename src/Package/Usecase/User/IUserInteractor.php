@@ -3,7 +3,8 @@
 namespace Package\Usecase\User;
 
 use Package\Usecase\User\Command\CreateUserCommand;
+use Package\Usecase\User\Response\CreateUserResponse;
 
 interface IUserInteractor {
-    public function create(CreateUserCommand $command): void;
+    public function create(CreateUserCommand $command): CreateUserResponse;
 }

@@ -60,7 +60,7 @@ class UserFactory
      */
     public function makeGeneralUserWithNotSetEmail(): User
     {
-        return $this->make(new UserStatus(UserStatus::WAITING));
+        return $this->make(new UserStatus(UserStatus::ACTIVE));
     }
 
     /**
@@ -68,6 +68,6 @@ class UserFactory
      */
     public function makeGeneralUser(): User
     {
-        return $this->make(new UserStatus(UserStatus::ACTIVE));
+        return $this->make(new UserStatus(UserStatus::WAITING));
     }
 }

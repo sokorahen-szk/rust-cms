@@ -75,7 +75,16 @@ class UserRepository implements IUserRepository {
     {
         $updateFlag = $this->userModel->where("id", $user->id()->value())
             ->update([
-                // TODO
+                "account_id" => $user->accountId()->value(),
+                "name" => $user->name(),
+                "status" => $user->status()->value(),
+                "role_id" => $user->roleId()->value(),
+                "email" => $user->email() ? $user->email()->value() : null,
+                "email_verified_at" => $user->emailVeifiedAt() ? $user->emailVeifiedAt()->toDateTimeString() : null,
+                "discord_id" => $user->discordId(),
+                "twitter_id" => $user->twitterId(),
+                "steam_id" => $user->steamId(),
+                "description" => $user->description(),
             ]);
 
         if (!(bool) $updateFlag) {
@@ -111,7 +120,7 @@ class UserRepository implements IUserRepository {
             $model->discord_id,
             $model->twitter_id,
             $model->steam_id,
-            new Password($model->password),
+            new Password($model->password, true),
             $model->description,
             $model->created_user_id ? new UserId($model->created_user_id) : null,
             new Datetime($model->created_at),

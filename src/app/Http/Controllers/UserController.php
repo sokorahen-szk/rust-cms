@@ -7,7 +7,7 @@ use Package\Domain\User\ValueObject\UserEmailVerifyTokenId;
 
 class UserController extends Controller
 {
-    public function __construct(IUserService $userService)
+    public function __construct(private IUserService $userService)
     {
     }
 
@@ -15,6 +15,6 @@ class UserController extends Controller
     {
         $this->userService->verifyEmail(new UserEmailVerifyTokenId($token));
 
-        // TODO:
+        return view("pages.register.email_verify_complete");
     }
 }

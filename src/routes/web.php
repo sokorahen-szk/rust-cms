@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -23,5 +22,5 @@ Route::prefix("register")->group(function() {
     Route::get("/", function() {
         return "TODO";
     });
-    Route::get("/{token}", [UserController::class, "verifyEmail"]);
+    Route::get("/token/{token}", [UserController::class, "verifyEmail"])->name("register.token");
 });

@@ -1,6 +1,7 @@
 <?php
 
 namespace Package\Domain\User\ValueObject;
+use App\Exceptions\ValueObjectInvalidException;
 
 class UserStatus
 {
@@ -46,5 +47,14 @@ class UserStatus
     public function isActive(): bool
     {
         return self::ACTIVE === $this->value;
+    }
+
+    public function changeActive(): UserStatus
+    {
+        if ($this->value === self::WAITING || self::INACTIVE) {
+            return new UserStatus(self::ACTIVE);
+        }
+
+        throw new ValueObjectInvalidException("user status は、WAITING, INACTIVEのみ、ACTIVEに変更可能");
     }
 }
