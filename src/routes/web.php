@@ -15,8 +15,12 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get("/", function() {
-    return view("index");
+    return view("pages.index");
 })->name("index");
+
+Route::get("/login", function() {
+    return view("pages.login");
+})->name("login");
 
 Route::prefix("register")->group(function() {
     Route::get("/", function() {
