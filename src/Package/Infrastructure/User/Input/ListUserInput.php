@@ -6,7 +6,7 @@ namespace Package\Infrastructure\User\Input;
 
 class ListUserInput
 {
-    public function __construct(public array $ids = [])
+    public function __construct(public ?string $keywords)
     {
     }
 }

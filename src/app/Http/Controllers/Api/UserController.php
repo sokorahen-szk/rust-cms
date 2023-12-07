@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\UserCreateRequest;
+use App\Http\Requests\Api\UserListRequest;
 use Illuminate\Http\Request;
 use Package\Usecase\User\Command\CreateUserCommand;
+use Package\Usecase\User\Command\ListUserCommand;
 use Package\Usecase\User\IUserInteractor;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -13,17 +15,25 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware("auth:api", ["except" => ["store"]]);
+        $this->middleware("auth:api", ["except" => ["index", "store"]]);
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Und
+     * @param UserListRequest $request
+     * @param IUserInteractor $interactor
+     * @return void
      */
-    public function index()
+    public function index(UserListRequest $request, IUserInteractor $interactor)
     {
-        //
+        $validator = $request->getValidator();
+        if ($validator->fails()) {
+            return response()->json($validator->getMessageBag(), Response::HTTP_BAD_REQUEST);
+        }
+
+        return response()->json($interactor->list(new ListUserCommand(
+            $request->input("keywords", null),
+        )));
     }
 
     /**

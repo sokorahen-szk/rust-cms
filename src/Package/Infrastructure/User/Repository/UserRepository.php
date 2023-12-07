@@ -15,6 +15,7 @@ use Package\Domain\User\ValueObject\Password;
 use Package\Domain\User\ValueObject\RoleId;
 use Package\Domain\User\ValueObject\UserStatus;
 use Package\Infrastructure\User\Input\ListUserInput;
+use Illuminate\Database\Eloquent\Collection;
 
 class UserRepository implements IUserRepository {
     /**
@@ -39,6 +40,7 @@ class UserRepository implements IUserRepository {
     public function list(ListUserInput $input): array
     {
         $models = $this->userModel
+            ->whereAccountId($input->keywords)
             ->get();
         return $this->toUsers($models);
     }

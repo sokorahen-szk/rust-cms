@@ -63,6 +63,14 @@ class User extends Authenticatable implements JWTSubject
         return UserFactory::new();
     }
 
+    public function scopeWhereAccountId($query, ?string $keywords)
+    {
+        if (!is_null($keywords)) {
+            $query->where("account_id", $keywords);
+        }
+        return $query;
+    }
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
