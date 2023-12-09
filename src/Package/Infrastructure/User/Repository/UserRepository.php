@@ -53,7 +53,6 @@ class UserRepository implements IUserRepository {
         $model = $this->userModel->create([
             "id" => $user->id()->value(),
             "account_id" => $user->accountId()->value(),
-            "name" => $user->name(),
             "status" => $user->status()->value(),
             "role_id" => $user->roleId()->value(),
             "email" => $user->email() ? $user->email()->value() : null,
@@ -78,7 +77,6 @@ class UserRepository implements IUserRepository {
         $updateFlag = $this->userModel->where("id", $user->id()->value())
             ->update([
                 "account_id" => $user->accountId()->value(),
-                "name" => $user->name(),
                 "status" => $user->status()->value(),
                 "role_id" => $user->roleId()->value(),
                 "email" => $user->email() ? $user->email()->value() : null,
@@ -114,7 +112,6 @@ class UserRepository implements IUserRepository {
         return new User(
             new UserId($model->id),
             new AccountId($model->account_id),
-            $model->name,
             new UserStatus($model->status),
             new RoleId($model->role_id),
             $model->email ? new Email($model->email) : null,

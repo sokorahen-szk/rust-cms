@@ -23,7 +23,7 @@ class UserCreateRequest extends BaseRequest
     {
         return [
             "account_id" => ["required", "string"],
-            "name" => ["required", "string"],
+            "player_name" => ["required", "string"],
             "email" => ["nullable", "email"],
             "discord_id" => ["nullable", "string"],
             "twitter_id" => ["nullable", "string"],

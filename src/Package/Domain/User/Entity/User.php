@@ -18,7 +18,6 @@ class User extends Entity
     public function __construct(
         private UserId $id,
         private AccountId $accountId,
-        private string $name,
         private UserStatus $status,
         private RoleId $roleId,
         private ?Email $email,
@@ -42,11 +41,6 @@ class User extends Entity
     public function accountId(): AccountId
     {
         return $this->accountId;
-    }
-    
-    public function name(): string
-    {
-        return $this->name;
     }
 
     public function status(): UserStatus

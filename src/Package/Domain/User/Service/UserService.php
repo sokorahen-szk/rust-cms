@@ -49,7 +49,6 @@ class UserService implements IUserService{
 
             $userFactory = new UserFactory(
                 $createUserCommand->accountId,
-                $createUserCommand->name,
                 $role->id()->value(),
                 $createUserCommand->email,
                 $createUserCommand->discordId,
@@ -73,7 +72,7 @@ class UserService implements IUserService{
             }
 
             $playerFactory = new PlayerFactory(
-                $createUserCommand->name,
+                $createUserCommand->playerName,
                 $createUserCommand->clanId,
                 $createUserCommand->battleMetricsId,
                 $createdUser->id()->value()

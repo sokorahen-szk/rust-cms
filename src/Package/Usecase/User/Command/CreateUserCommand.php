@@ -8,7 +8,7 @@ class CreateUserCommand
 {
     public function __construct(
         public string $accountId,
-        public string $name,
+        public string $playerName,
         public ?string $email,
         public ?string $discordId,
         public ?string $twitterId,

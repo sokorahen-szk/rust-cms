@@ -15,7 +15,6 @@ return new class () extends Migration {
         Schema::create("users", function (Blueprint $table) {
             $table->uuid("id", 36)->primary()->comment("ユーザID");
             $table->string("account_id")->unique()->comment("アカウントID");
-            $table->string("name")->comment("ユーザ名");
             //
             // users.status
             // WAITING - アカウント作成途中で中断した場合

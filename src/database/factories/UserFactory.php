@@ -26,7 +26,6 @@ class UserFactory extends Factory
         return [
             "id" => (string) Str::uuid(),
             "account_id" => "test_user_" . mt_rand(),
-            "name" => fake()->name(),
             "status" => $statuses[mt_rand(0, count($statuses) - 1)],
             "role_id" => function () {
                 return RoleModel::factory()->create()->id;

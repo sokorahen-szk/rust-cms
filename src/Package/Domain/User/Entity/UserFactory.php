@@ -18,7 +18,6 @@ class UserFactory
 {
     public function __construct(
         private string $accountId,
-        private string $name,
         private string $roleId,
         private ?string $email,
         private ?string $discordId,
@@ -39,7 +38,6 @@ class UserFactory
         return new User(
             new UserId($id),
             new AccountId($this->accountId),
-            $this->name,
             $userStatus,
             new RoleId($this->roleId),
             $this->email ? new Email($this->email) : null,

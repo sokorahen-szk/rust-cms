@@ -21,10 +21,11 @@ class ListClanResponse
             $this->data[] = (object) [
                 "id" => $clan->id()->value(),
                 "name" => $clan->name()->value(),
-                "imageUrl" => $clan->imageUrl()->value(),
+                "image_url" => $clan->imageUrl()->value(),
                 "introduction" => $clan->introduction()->value(),
-                "createdAt" => $clan->createdAt(),
-                "updatedAt" => $clan->updatedAt(),
+                "created_user_id" => $clan->createdUserId()->value(),
+                "created_at" => $clan->createdAt(),
+                "updated_at" => $clan->updatedAt(),
             ];
         }
     }

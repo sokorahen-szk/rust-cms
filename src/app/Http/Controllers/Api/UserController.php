@@ -52,7 +52,7 @@ class UserController extends Controller
 
         return response()->json($interactor->create(new CreateUserCommand(
             $request->account_id,
-            $request->name,
+            $request->player_name,
             $request->input("email", null),
             $request->input("discord_id", null),
             $request->input("twitter_id", null),
