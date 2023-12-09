@@ -41,7 +41,7 @@ class UserRepository implements IUserRepository {
     {
         $models = $this->userModel
             ->whereAccountId($input->keywords)
-            ->get();
+            ->paginate(15);
         return $this->toUsers($models);
     }
 
@@ -96,7 +96,7 @@ class UserRepository implements IUserRepository {
      * @param Collection $models
      * @return User[]
      */
-    private function toUsers(Collection $models): array
+    private function toUsers(mixed $models): array
     {
         return $models->map(function ($model) {
             return $this->toUser($model);

@@ -21,6 +21,10 @@ class ListUserResponse
             $this->data[] = (object) [
                 "id" => $user->id()->value(),
                 "account_id" => $user->accountId()->value(),
+                "discord_id" => $user->discordId(),
+                "twitter_id" => $user->twitterId(),
+                "steam_id" => $user->steamId(),
+                "created_at" => $user->createdAt(),
             ];
         }
     }

@@ -65,7 +65,7 @@ class User extends Authenticatable implements JWTSubject
     public function scopeWhereAccountId($query, ?string $keywords)
     {
         if (!is_null($keywords)) {
-            $query->where("account_id", $keywords);
+            $query->where("account_id", "like", "%" . $keywords . "%");
         }
         return $query;
     }

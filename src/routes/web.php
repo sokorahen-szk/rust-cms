@@ -28,3 +28,7 @@ Route::prefix("register")->group(function() {
     });
     Route::get("/token/{token}", [UserController::class, "verifyEmail"])->name("register.token");
 });
+
+Route::prefix("users")->group(function() {
+    Route::get("/", [UserController::class, "list"])->name("users.list");
+});

@@ -11,6 +11,11 @@ class UserController extends Controller
     {
     }
 
+    public function list()
+    {
+        return view("pages.users.list");
+    }
+
     public function verifyEmail($token)
     {
         $this->userService->verifyEmail(new UserEmailVerifyTokenId($token));
