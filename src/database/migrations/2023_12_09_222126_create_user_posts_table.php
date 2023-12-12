@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('user_posts', function (Blueprint $table) {
             $table->uuid("id", 36)->primary()->comment("ユーザ投稿ID");
-            $table->eunm("platform", [
+            $table->enum("platform", [
                 "PC",
                 "PS4",
                 "Xbox",

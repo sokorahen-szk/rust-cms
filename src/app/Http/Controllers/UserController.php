@@ -11,6 +11,11 @@ class UserController extends Controller
     {
     }
 
+    public function login()
+    {
+        return view("pages.login");
+    }
+
     public function list()
     {
         return view("pages.users.list");

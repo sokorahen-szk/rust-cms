@@ -1,5 +1,6 @@
 <?php
 
+use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -15,20 +16,22 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get("/", function() {
-    return view("pages.index");
+    return Inertia::render("index");
 })->name("index");
-
-Route::get("/login", function() {
-    return view("pages.login");
-})->name("login");
-
-Route::prefix("register")->group(function() {
-    Route::get("/", function() {
-        return "TODO";
-    });
-    Route::get("/token/{token}", [UserController::class, "verifyEmail"])->name("register.token");
-});
 
 Route::prefix("users")->group(function() {
     Route::get("/", [UserController::class, "list"])->name("users.list");
+});
+
+Route::group([
+    "middleware" => "auth.guard"
+], function() {
+    Route::get("/login", [UserController::class, "login"])->name("login");
+
+    Route::prefix("register")->group(function() {
+        Route::get("/", function() {
+            return Inertia::render("register");
+        });
+        Route::get("/token/{token}", [UserController::class, "verifyEmail"])->name("register.token");
+    });
 });

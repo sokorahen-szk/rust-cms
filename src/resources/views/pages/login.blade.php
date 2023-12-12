@@ -33,7 +33,10 @@
                 url: "/api/auth/login",
                 data: { account_id: $("#account_id").val(), password: $("#password").val() }
             }).done( (res) => {
-                Cookies.set("access_token", res.access_token);
+                let date = new Date()
+                date.setTime(date.getTime() + (res.expires_in * 1000))
+                Cookies.set("access_token", res.access_token, { expires: date });
+                location.href = "/";
             }).fail( () => {
                 $(".alert").removeClass("hidden");
             })

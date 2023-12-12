@@ -44,8 +44,21 @@ class UserFactory extends Factory
      */
     public function unverified()
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn () => [
             "email_verified_at" => null,
+        ]);
+    }
+
+    /**
+     * Indicate that the model"s email address should be unverified.
+     *
+     * @return static
+     */
+    public function adminUser()
+    {
+        return $this->state(fn () => [
+            "account_id" => "admin",
+            "status" => "ACTIVE",
         ]);
     }
 }
