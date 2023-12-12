@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use Package\Domain\User\Service\IUserService;
 use Package\Domain\User\ValueObject\UserEmailVerifyTokenId;
 
@@ -13,7 +14,7 @@ class UserController extends Controller
 
     public function login()
     {
-        return view("pages.login");
+        return Inertia::render("login");
     }
 
     public function list()

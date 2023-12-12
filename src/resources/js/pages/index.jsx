@@ -1,7 +1,10 @@
+import Header from "../components/organisms/header";
+
 export default function Index() {
     return (
-        <div>
-            <p>Hello World!</p>
-        </div>
+        <>
+            <Header title="rustサイト" />
+            a
+        </>
     );
 }
