@@ -14,12 +14,13 @@ export default function Input(props) {
     ])
     return (
         <>
-            <input 
+            <input
                 type={props.type}
                 id={props.id}
                 className={classes}
                 placeholder={props.placeholder}
                 required={props.required}
+                onInput={props.inputEvent}
             />
         </>
     )

@@ -11,9 +11,14 @@ export default function Button(props) {
         `py-${props.y}`,
         {"rounded": props.rounded}
     ])
+
+    const click = () => {
+        props.clickEvent();
+    }
+
     const render = () => {
         const button = (
-            <button className={classes}>
+            <button className={classes} onClick={click}>
                 { props.text }
             </button>
         )
