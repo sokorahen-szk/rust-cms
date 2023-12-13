@@ -3,22 +3,20 @@ import clsx from 'clsx';
 
 export default function Button(props) {
     const classes = clsx([
-        `bg-${props.color}-600`,
-        `hover:bg-${props.color}-500`,
-        "text-white",
         "font-bold",
-        `px-${props.x}`,
-        `py-${props.y}`,
-        {"rounded": props.rounded}
-    ])
-
-    const click = () => {
-        props.clickEvent();
-    }
+        `px-${props.px}`,
+        `py-${props.py}`,
+        `mr-${props.mr}`,
+        "text-white",
+        {"rounded": props.rounded},
+        `bg-${props.color}-600`,
+        {"opacity-50": props.disabled},
+        !props.disabled ? `hover:bg-${props.color}-500` : "",
+    ]);
 
     const render = () => {
         const button = (
-            <button className={classes} onClick={click}>
+            <button className={classes} onClick={props.clickEvent ? props.clickEvent : () => {}} disabled={props.disabled}>
                 { props.text }
             </button>
         )
