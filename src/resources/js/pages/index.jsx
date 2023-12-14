@@ -11,7 +11,9 @@ export default function Index() {
     return (
         <>
             <Header title="rustサイト" isLogin={isLogin} />
-            a
+            <div>
+                a
+            </div>
         </>
     );
 }

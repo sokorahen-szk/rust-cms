@@ -17,6 +17,7 @@ return new class () extends Migration {
             $table->string("name")->comment("タグ名");
             $table->string("description")->comment("備考");
             $table->boolean("is_enabled")->comment("タグ有効有無");
+            $table->boolean("is_display_on_top")->comment("トップページ表示可否");
         });
     }
 

@@ -26,9 +26,9 @@ export default function Header(props) {
     }
 
     return (
-    <header className="p-2 bg-gray-100">
+    <header className="p-2 bg-gray-800">
         <div className="flex justify-between">
-            <div className="py-2 text-md">
+            <div className="py-2 text-lg text-white">
                 <a href="/">{ props.title }</a>
             </div>
             {props.isLogin ? logoutButtonNav() : loginButtonNav()}
