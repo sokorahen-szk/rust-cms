@@ -27,4 +27,13 @@ class TagModel extends Model
 
         return $query;
     }
+
+    public function scopeWhereIsEnabled($query, ?bool $isEnabled)
+    {
+        if (!is_null($isEnabled)) {
+            $query->where("is_enabled", $isEnabled);
+        }
+
+        return $query;
+    }
 }

@@ -33,6 +33,10 @@ class RepositoryProvider extends ServiceProvider
             \Package\Domain\User\Repository\IUserEmailVerifyTokenRepository::class,
             \Package\Infrastructure\User\Repository\UserEmailVerifyTokenRepository::class
         );
+        $this->app->bind(
+            \Package\Domain\Tag\Repository\ITagRepository::class,
+            \Package\Infrastructure\Tag\Repository\TagRepository::class
+        );
     }
 
     /**

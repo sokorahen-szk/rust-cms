@@ -6,7 +6,7 @@ namespace Package\Infrastructure\Tag\Input;
 
 class ListTagInput
 {
-    public function __construct(public ?bool $isDisplayOnTop)
+    public function __construct(public ?bool $isEnabled, public ?bool $isDisplayOnTop)
     {
     }
 }

@@ -25,7 +25,7 @@ class Tag extends BaseEntity
 
     public function name(): string
     {
-        return $this->string;
+        return $this->name;
     }
 
     public function description(): ?string

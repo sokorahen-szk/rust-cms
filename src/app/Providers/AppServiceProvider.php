@@ -21,6 +21,10 @@ class AppServiceProvider extends ServiceProvider
             \Package\Usecase\User\IUserInteractor::class,
             \Package\Usecase\User\UserInteractor::class
         );
+        $this->app->bind(
+            \Package\Usecase\Tag\ITagInteractor::class,
+            \Package\Usecase\Tag\TagInteractor::class
+        );
     }
 
     /**

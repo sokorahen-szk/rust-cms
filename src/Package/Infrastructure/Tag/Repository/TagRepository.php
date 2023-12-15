@@ -9,6 +9,7 @@ use Package\Domain\Tag\Entity\Tag;
 use Package\Domain\Tag\Repository\ITagRepository;
 use Package\Domain\Tag\ValueObject\TagId;
 use Package\Infrastructure\Tag\Input\ListTagInput;
+use Illuminate\Database\Eloquent\Collection;
 
 class TagRepository implements ITagRepository
 {
@@ -22,6 +23,7 @@ class TagRepository implements ITagRepository
     public function list(ListTagInput $input): array
     {
         $models = $this->tagModel->whereIsDisplayOnTop($input->isDisplayOnTop)
+            ->whereIsEnabled($input->isEnabled)
             ->get();
 
         return $this->toTags($models);
@@ -44,8 +46,8 @@ class TagRepository implements ITagRepository
             new TagId($tagModel->id),
             $tagModel->name,
             $tagModel->description,
-            $tagModel->is_enabled,
-            $tagModel->is_display_on_top,
+            (bool) $tagModel->is_enabled,
+            (bool) $tagModel->is_display_on_top,
         );
     }
 }
