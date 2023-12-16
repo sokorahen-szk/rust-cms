@@ -6,14 +6,8 @@ namespace Package\Domain\User\Entity;
 
 use Illuminate\Support\Str;
 use Package\Domain\Shared\ValueObject\Datetime;
-use Package\Domain\User\Entity\User;
-use Package\Domain\User\ValueObject\AccountId;
-use Package\Domain\User\ValueObject\Email;
-use Package\Domain\User\ValueObject\Password;
-use Package\Domain\User\ValueObject\RoleId;
 use Package\Domain\User\ValueObject\UserEmailVerifyTokenId;
 use Package\Domain\User\ValueObject\UserId;
-use Package\Domain\User\ValueObject\UserStatus;
 
 class UserEmailVerifyTokenFactory
 {
