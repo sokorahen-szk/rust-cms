@@ -37,6 +37,10 @@ class RepositoryProvider extends ServiceProvider
             \Package\Domain\Tag\Repository\ITagRepository::class,
             \Package\Infrastructure\Tag\Repository\TagRepository::class
         );
+        $this->app->bind(
+            \Package\Domain\User\Repository\IUserPostRepository::class,
+            \Package\Infrastructure\User\Repository\UserPostRepository::class
+        );
     }
 
     /**

@@ -17,7 +17,7 @@ class UserPost extends Entity
         private string $message,
         private bool $isDisplayLoggedInUser,
         private UserId $createdUserId,
-        private Datetime $closeAt,
+        private ?Datetime $closeAt,
         private Datetime $createdAt
     )
     {
@@ -48,7 +48,7 @@ class UserPost extends Entity
         return $this->createdUserId;
     }
 
-    public function closeAt(): Datetime
+    public function closeAt(): ?Datetime
     {
         return $this->closeAt;
     }

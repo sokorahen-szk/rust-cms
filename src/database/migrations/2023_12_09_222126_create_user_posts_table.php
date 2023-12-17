@@ -24,7 +24,7 @@ return new class extends Migration
             // true = ログインユーザのみ表示する、 false = 誰でも表示する
             $table->boolean("is_display_logged_in_user")->comment("ログインユーザにのみ表示可否");
             $table->uuid("created_user_id", 36)->comment("作成ユーザID");
-            $table->datetime("close_at")->comment("受付終了日時");
+            $table->datetime("close_at")->nullable()->comment("受付終了日時");
             $table->datetime("created_at")->comment("作成日時");
         });
     }
