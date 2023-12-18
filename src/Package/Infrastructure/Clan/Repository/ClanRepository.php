@@ -7,17 +7,14 @@ namespace Package\Infrastructure\Clan\Repository;
 use Package\Domain\Clan\Repository\IClanRepository;
 use Package\Domain\Clan\Entity\Clan;
 use Package\Domain\Clan\ValueObject\ClanId;
-use Package\Domain\Clan\ValueObject\ClanName;
-use Package\Domain\Shared\ValueObject\Datetime;
 use App\Models\ClanModel;
 use Package\Infrastructure\Clan\Input\ListClanInput;
-use Illuminate\Database\Eloquent\Collection;
-use Package\Domain\Clan\ValueObject\ImageUrl;
-use Package\Domain\Clan\ValueObject\Introduction;
-use Package\Domain\User\ValueObject\UserId;
+use Package\Domain\Shared\Infrastructure\ModelToEntityConverter;
 
 class ClanRepository implements IClanRepository
 {
+    use ModelToEntityConverter;
+
     /**
      * @param ClanModel $clanModel
      */
@@ -95,33 +92,5 @@ class ClanRepository implements IClanRepository
         if (!(bool) $deleteFlag) {
             throw new \Exception("failed to delete clan.");
         }
-    }
-
-    /**
-     * @param Collection $models
-     * @return Clan[]
-     */
-    private function toClans(Collection $models): array
-    {
-        return $models->map(function ($model) {
-            return $this->toClan($model);
-        })->toArray();
-    }
-
-    /**
-     * @param ClanModel $model
-     * @return Clan
-     */
-    private function toClan(ClanModel $model): Clan
-    {
-        return new Clan(
-            new ClanId($model->id),
-            new ClanName($model->name),
-            new ImageUrl($model->image_url),
-            new Introduction($model->introduction),
-            new UserId($model->created_user_id),
-            new Datetime($model->created_at),
-            new Datetime($model->updated_at)
-        );
     }
 }

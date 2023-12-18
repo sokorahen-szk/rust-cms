@@ -54,7 +54,7 @@ class ClanModel extends Model
 
     public function user()
     {
-        return $this->hasMany(User::class, "id", "created_user_id");
+        return $this->hasOne(User::class, "id", "created_user_id");
     }
 
     protected static function newFactory()

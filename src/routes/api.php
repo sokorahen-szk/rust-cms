@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\ClanController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\TagController;
+use App\Http\Controllers\Api\UserPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,7 @@ use App\Http\Controllers\Api\TagController;
 Route::middleware(["api"])->resource("clans", ClanController::class);
 Route::middleware(["api"])->resource("users", UserController::class);
 Route::middleware(["api"])->resource("tags", TagController::class);
+Route::middleware(["api"])->resource("posts", UserPostController::class);
 
 Route::group([
     "middleware" => "api",

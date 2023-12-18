@@ -11,6 +11,7 @@ use Package\Domain\User\ValueObject\UserPostId;
 
 class UserPost extends Entity
 {
+    public User $user;
     public function __construct(
         private UserPostId $id,
         private Platform $platform,
@@ -56,5 +57,17 @@ class UserPost extends Entity
     public function createdAt(): Datetime
     {
         return $this->createdAt;
+    }
+
+    public function setUser(User $user): void
+    {
+        if ($this->createdUserId()->equal($user->id)) {
+            $this->user = $user;
+        }
+    }
+
+    public function getUser(): User
+    {
+        return $this->user;
     }
 }

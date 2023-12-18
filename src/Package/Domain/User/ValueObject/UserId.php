@@ -15,4 +15,9 @@ class UserId
     {
         return $this->value;
     }
+
+    public function equal(UserId $userId): bool
+    {
+        return $this instanceof $userId && $this->value() === $userId->value();
+    }
 }

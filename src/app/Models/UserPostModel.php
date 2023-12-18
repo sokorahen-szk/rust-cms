@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\UserPostFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,7 +22,7 @@ class UserPostModel extends Model
 
     public function scopeWherePlatforms($query, ?array $platforms)
     {
-        if (count($platforms) > 0) {
+        if (count($platforms ?: []) > 0) {
             $query->whereIn("platforms", $platforms);
         }
 
@@ -32,9 +33,19 @@ class UserPostModel extends Model
     {
         $sortSeparate = explode("#", $sortKey);
         if (!is_null($sortKey)) {
-            $query->orderBy($sortSeparate[0]. $sortSeparate[1]);
+            $query->orderBy($sortSeparate[0], $sortSeparate[1]);
         }
         
         return $query;
+    }
+
+    public function user()
+    {
+        return $this->hasOne(User::class, "id", "created_user_id");
+    }
+
+    protected static function newFactory()
+    {
+        return UserPostFactory::new();
     }
 }

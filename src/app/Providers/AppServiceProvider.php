@@ -25,6 +25,10 @@ class AppServiceProvider extends ServiceProvider
             \Package\Usecase\Tag\ITagInteractor::class,
             \Package\Usecase\Tag\TagInteractor::class
         );
+        $this->app->bind(
+            \Package\Usecase\User\IUserPostInteractor::class,
+            \Package\Usecase\User\UserPostInteractor::class
+        );
     }
 
     /**

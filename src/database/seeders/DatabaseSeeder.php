@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             ClanSeeder::class,
             UserSeeder::class,
+            UserPostSeeder::class,
         ]);
     }
 }

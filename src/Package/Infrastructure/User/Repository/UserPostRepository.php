@@ -15,7 +15,7 @@ use Package\Infrastructure\User\Input\ListUserPostInput;
 
 class UserPostRepository implements IUserPostRepository
 {
-    public function __construct(UserPostModel $model)
+    public function __construct(private UserPostModel $model)
     {
     }
 
@@ -27,6 +27,7 @@ class UserPostRepository implements IUserPostRepository
         $models = $this->model->wherePlatforms($input->platforms)
             ->where("is_display_logged_in_user", $input->isLogin)
             ->sort($input->sortKey)
+            ->with(["user"])
             ->get();
 
         return $this->toUserPosts($models);

@@ -26,6 +26,8 @@ return new class extends Migration
             $table->uuid("created_user_id", 36)->comment("作成ユーザID");
             $table->datetime("close_at")->nullable()->comment("受付終了日時");
             $table->datetime("created_at")->comment("作成日時");
+
+            $table->foreign("created_user_id")->references("id")->on("users")->onUpdate("CASCADE")->onDelete("CASCADE");
         });
     }
 
