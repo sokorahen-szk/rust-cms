@@ -16,8 +16,12 @@ use Package\Domain\User\ValueObject\RoleId;
 use Package\Domain\User\ValueObject\UserStatus;
 use Package\Infrastructure\User\Input\ListUserInput;
 use Illuminate\Database\Eloquent\Collection;
+use Package\Domain\Shared\Infrastructure\ModelToEntityConverter;
 
-class UserRepository implements IUserRepository {
+class UserRepository implements IUserRepository
+{
+    use ModelToEntityConverter;
+
     /**
      * @param UserModel $userModel
      */
@@ -90,40 +94,5 @@ class UserRepository implements IUserRepository {
         if (!(bool) $updateFlag) {
             throw new \Exception("failed to update user.");
         }
-    }
-
-    /**
-     * @param Collection $models
-     * @return User[]
-     */
-    private function toUsers(mixed $models): array
-    {
-        return $models->map(function ($model) {
-            return $this->toUser($model);
-        })->toArray();
-    }
-
-    /**
-     * @param UserModel $model
-     * @return User
-     */
-    private function toUser(UserModel $model): User
-    {
-        return new User(
-            new UserId($model->id),
-            new AccountId($model->account_id),
-            new UserStatus($model->status),
-            new RoleId($model->role_id),
-            $model->email ? new Email($model->email) : null,
-            $model->email_verified_at ? new Datetime($model->email_verified_at) : null,
-            $model->discord_id,
-            $model->twitter_id,
-            $model->steam_id,
-            new Password($model->password, true),
-            $model->description,
-            $model->created_user_id ? new UserId($model->created_user_id) : null,
-            new Datetime($model->created_at),
-            new Datetime($model->updated_at)
-        );
     }
 }

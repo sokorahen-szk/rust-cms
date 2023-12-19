@@ -7,14 +7,15 @@ namespace Package\Infrastructure\User\Repository;
 use Package\Domain\User\Repository\IRoleRepository;
 use App\Models\RoleModel;
 use App\Exceptions\NotFoundRecordException;
+use Package\Domain\Shared\Infrastructure\ModelToEntityConverter;
 use Package\Domain\User\ValueObject\Permission;
 use Package\Domain\User\Entity\Role;
 use Package\Domain\User\ValueObject\DefaultPermission;
-use Package\Domain\User\ValueObject\PermissionLevel;
-use Package\Domain\User\ValueObject\RoleId;
-use Package\Domain\User\ValueObject\RoleName;
 
-class RoleRepository implements IRoleRepository {
+class RoleRepository implements IRoleRepository
+{
+    use ModelToEntityConverter;
+
     /**
      * @param RoleModel $roleModel
      */
@@ -36,21 +37,5 @@ class RoleRepository implements IRoleRepository {
             throw new NotFoundRecordException("no role record");
         }
         return $this->toRole($model);
-    }
-
-    /**
-     * @param RoleModel $roleModel
-     * @return Role
-     */
-    private function toRole(RoleModel $roleModel): Role
-    {
-        return new Role(
-            new RoleId($roleModel->id),
-            new RoleName($roleModel->name),
-            new Permission($roleModel->permission),
-            new PermissionLevel($roleModel->permission_level),
-            new DefaultPermission($roleModel->default_permission),
-            $roleModel->description
-        );
     }
 }

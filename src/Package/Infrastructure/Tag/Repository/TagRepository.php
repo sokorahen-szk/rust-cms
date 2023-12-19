@@ -7,12 +7,14 @@ namespace Package\Infrastructure\Tag\Repository;
 use App\Models\TagModel;
 use Package\Domain\Tag\Entity\Tag;
 use Package\Domain\Tag\Repository\ITagRepository;
-use Package\Domain\Tag\ValueObject\TagId;
 use Package\Infrastructure\Tag\Input\ListTagInput;
 use Illuminate\Database\Eloquent\Collection;
+use Package\Domain\Shared\Infrastructure\ModelToEntityConverter;
 
 class TagRepository implements ITagRepository
 {
+    use ModelToEntityConverter;
+
     /**
      * @param TagModel $model
      */
@@ -38,16 +40,5 @@ class TagRepository implements ITagRepository
         return $models->map(function ($model) {
             return $this->toTag($model);
         })->toArray();
-    }
-
-    private function toTag(TagModel $tagModel): Tag
-    {
-        return new Tag(
-            new TagId($tagModel->id),
-            $tagModel->name,
-            $tagModel->description,
-            (bool) $tagModel->is_enabled,
-            (bool) $tagModel->is_display_on_top,
-        );
     }
 }

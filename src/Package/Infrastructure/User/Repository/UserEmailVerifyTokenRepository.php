@@ -6,13 +6,15 @@ namespace Package\Infrastructure\User\Repository;
 
 use Package\Domain\User\Repository\IUserEmailVerifyTokenRepository;
 use App\Models\UserEmailVerifyTokenModel;
-use Package\Domain\Shared\ValueObject\Datetime;
 use Package\Domain\User\Entity\UserEmailVerifyToken;
 use Package\Domain\User\ValueObject\UserEmailVerifyTokenId;
-use Package\Domain\User\ValueObject\UserId;
 use App\Exceptions\NotFoundRecordException;
+use Package\Domain\Shared\Infrastructure\ModelToEntityConverter;
 
-class UserEmailVerifyTokenRepository implements IUserEmailVerifyTokenRepository {
+class UserEmailVerifyTokenRepository implements IUserEmailVerifyTokenRepository
+{
+    use ModelToEntityConverter;
+
     public function __construct(private UserEmailVerifyTokenModel $model)
     {
         
@@ -58,15 +60,5 @@ class UserEmailVerifyTokenRepository implements IUserEmailVerifyTokenRepository 
         if (!(bool) $updateFlag) {
             throw new \Exception("failed to update user_email_verify_token.");
         }
-    }
-
-    private function toUserEmailVerifyToken(UserEmailVerifyTokenModel $model): UserEmailVerifyToken
-    {
-        return new UserEmailVerifyToken(
-            new UserEmailVerifyTokenId($model->id),
-            new UserId($model->user_id),
-            (bool) $model->verified,
-            $model->expires_at ? new Datetime($model->expires_at) : null,
-        );
     }
 }

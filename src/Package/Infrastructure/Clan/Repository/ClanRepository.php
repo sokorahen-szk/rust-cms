@@ -43,7 +43,7 @@ class ClanRepository implements IClanRepository
             ->whereIn("id", $input->ids)
             ->orderBy("created_at", "desc")
             ->get();
-        return $this->toClans($models);
+        return $this->toEntities($models, Clan::class);
     }
 
     /**
