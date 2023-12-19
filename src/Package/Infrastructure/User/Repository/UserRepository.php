@@ -8,14 +8,7 @@ use Package\Domain\User\Entity\User;
 use Package\Domain\User\Repository\IUserRepository;
 use Package\Domain\User\ValueObject\UserId;
 use App\Models\User as UserModel;
-use Package\Domain\Shared\ValueObject\Datetime;
-use Package\Domain\User\ValueObject\AccountId;
-use Package\Domain\User\ValueObject\Email;
-use Package\Domain\User\ValueObject\Password;
-use Package\Domain\User\ValueObject\RoleId;
-use Package\Domain\User\ValueObject\UserStatus;
 use Package\Infrastructure\User\Input\ListUserInput;
-use Illuminate\Database\Eloquent\Collection;
 use Package\Domain\Shared\Infrastructure\ModelToEntityConverter;
 
 class UserRepository implements IUserRepository
@@ -46,7 +39,7 @@ class UserRepository implements IUserRepository
         $models = $this->userModel
             ->whereAccountId($input->keywords)
             ->paginate(15);
-        return $this->toUsers($models);
+        return $this->toEntities($models, User::class);
     }
 
     /**

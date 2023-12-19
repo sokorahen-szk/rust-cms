@@ -28,7 +28,7 @@ class TagRepository implements ITagRepository
             ->whereIsEnabled($input->isEnabled)
             ->get();
 
-        return $this->toTags($models);
+        return $this->toEntities($models, Tag::class);
     }
 
     /**

@@ -6,6 +6,7 @@ namespace Package\Infrastructure\User\Repository;
 
 use App\Models\UserPostModel;
 use Package\Domain\Shared\Infrastructure\ModelToEntityConverter;
+use Package\Domain\User\Entity\UserPost;
 use Package\Domain\User\Repository\IUserPostRepository;
 use Package\Infrastructure\User\Input\ListUserPostInput;
 
@@ -28,6 +29,6 @@ class UserPostRepository implements IUserPostRepository
             ->with(["user"])
             ->get();
 
-        return $this->toUserPosts($models);
+        return $this->toEntities($models, UserPost::class);
     }
 }

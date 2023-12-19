@@ -35,6 +35,7 @@ class User extends Authenticatable implements JWTSubject
         "twitter_id",
         "steam_id",
         "password",
+        "avatar_image",
         "description",
         "created_user_id",
     ];

@@ -39,6 +39,7 @@ return new class () extends Migration {
             $table->string("twitter_id")->nullable()->comment("TwitterID");
             $table->string("steam_id")->nullable()->comment("SteamID");
             $table->string("password")->comment("パスワード");
+            $table->string("avatar_image")->comment("アバター画像");
             $table->string("description")->nullable()->comment("備考");
             $table->uuid("created_user_id", 36)->nullable()->comment("作成ユーザID");
             $table->timestamps();

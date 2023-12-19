@@ -23,7 +23,7 @@ class UserPostModel extends Model
     public function scopeWherePlatforms($query, ?array $platforms)
     {
         if (count($platforms ?: []) > 0) {
-            $query->whereIn("platforms", $platforms);
+            $query->whereIn("platform", $platforms);
         }
 
         return $query;

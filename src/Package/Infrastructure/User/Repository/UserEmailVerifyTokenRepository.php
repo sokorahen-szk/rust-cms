@@ -17,7 +17,6 @@ class UserEmailVerifyTokenRepository implements IUserEmailVerifyTokenRepository
 
     public function __construct(private UserEmailVerifyTokenModel $model)
     {
-        
     }
 
     /**

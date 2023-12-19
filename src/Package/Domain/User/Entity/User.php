@@ -7,6 +7,7 @@ namespace Package\Domain\User\Entity;
 use Package\Domain\Shared\BaseEntity as Entity;
 use Package\Domain\Shared\ValueObject\Datetime;
 use Package\Domain\User\ValueObject\AccountId;
+use Package\Domain\User\ValueObject\AvatarImage;
 use Package\Domain\User\ValueObject\Email;
 use Package\Domain\User\ValueObject\Password;
 use Package\Domain\User\ValueObject\RoleId;
@@ -26,6 +27,7 @@ class User extends Entity
         private ?string $twitterId,
         private ?string $steamId,
         private Password $password,
+        private AvatarImage $avatarImage,
         private ?string $description,
         private ?UserId $createUserId,
         private Datetime $createdAt,
@@ -91,6 +93,11 @@ class User extends Entity
     public function password(): Password
     {
         return $this->password;
+    }
+
+    public function avatarImage(): AvatarImage
+    {
+        return $this->avatarImage;
     }
 
     public function description(): ?string

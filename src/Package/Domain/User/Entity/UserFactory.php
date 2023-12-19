@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Package\Domain\Shared\ValueObject\Datetime;
 use Package\Domain\User\Entity\User;
 use Package\Domain\User\ValueObject\AccountId;
+use Package\Domain\User\ValueObject\AvatarImage;
 use Package\Domain\User\ValueObject\Email;
 use Package\Domain\User\ValueObject\Password;
 use Package\Domain\User\ValueObject\RoleId;
@@ -46,6 +47,7 @@ class UserFactory
             $this->twitterId ?: $this->twitterId,
             $this->steamId ?: $this->steamId,
             $hashedPassword,
+            new AvatarImage(AvatarImage::AVATAR_DEFAULT_IMAGE),
             $this->description ?: $this->description,
             $this->createdUserId ? new UserId($this->createdUserId) : null,
             new Datetime($now),

@@ -42,6 +42,7 @@ use Package\Domain\User\ValueObject\Email;
 use Package\Domain\User\ValueObject\Password;
 use Package\Domain\User\ValueObject\UserStatus;
 use Package\Domain\Shared\ValueObject\Datetime;
+use Package\Domain\User\ValueObject\AvatarImage;
 
 trait ModelToEntityConverter
 {
@@ -130,7 +131,7 @@ trait ModelToEntityConverter
      */
     protected function toUserPost(UserPostModel $model): UserPost
     {
-        return new UserPost(
+        $userPost = new UserPost(
             new UserPostId($model->id),
             new Platform($model->platform),
             $model->message,
@@ -139,18 +140,9 @@ trait ModelToEntityConverter
             $model->close_at ? new Datetime($model->close_at) : null,
             new Datetime($model->createdAt),
         );
-    }
+        $userPost->setUser($this->toUser($model->user));
 
-
-    /**
-     * @param Collection $models
-     * @return User[]
-     */
-    private function toUsers(mixed $models): array
-    {
-        return $models->map(function ($model) {
-            return $this->toUser($model);
-        })->toArray();
+        return $userPost;
     }
 
     /**
@@ -170,6 +162,7 @@ trait ModelToEntityConverter
             $model->twitter_id,
             $model->steam_id,
             new Password($model->password, true),
+            new AvatarImage($model->avatar_image),
             $model->description,
             $model->created_user_id ? new UserId($model->created_user_id) : null,
             new Datetime($model->created_at),

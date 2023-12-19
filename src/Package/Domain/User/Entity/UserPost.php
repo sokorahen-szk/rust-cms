@@ -61,7 +61,7 @@ class UserPost extends Entity
 
     public function setUser(User $user): void
     {
-        if ($this->createdUserId()->equal($user->id)) {
+        if ($this->createdUserId()->equal($user->id())) {
             $this->user = $user;
         }
     }
