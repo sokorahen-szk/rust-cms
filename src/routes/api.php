@@ -18,6 +18,12 @@ use App\Http\Controllers\Api\UserPostController;
 |
 */
 
+/**
+ * /api/clans
+ * /api/users
+ * /api/tags
+ * /api/posts
+ */
 Route::middleware(["api"])->resource("clans", ClanController::class);
 Route::middleware(["api"])->resource("users", UserController::class);
 Route::middleware(["api"])->resource("tags", TagController::class);
@@ -27,6 +33,8 @@ Route::group([
     "middleware" => "api",
     "prefix" => "auth"
 ], function() {
+    // GET /api/auth/logout
     Route::get("/logout", [AuthController::class, "logout"]);
+    // POST /api/auth/login
     Route::post("/login", [AuthController::class, "login"]);
 });

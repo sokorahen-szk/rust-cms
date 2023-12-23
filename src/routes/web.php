@@ -19,19 +19,17 @@ Route::get("/", function() {
     return Inertia::render("index");
 })->name("index");
 
-Route::prefix("users")->group(function() {
-    Route::get("/", [UserController::class, "list"])->name("users.list");
-});
-
 Route::group([
     "middleware" => "auth.guard"
 ], function() {
     Route::get("/login", [UserController::class, "login"])->name("login");
 
     Route::prefix("register")->group(function() {
+        // GET /register/
         Route::get("/", function() {
             return Inertia::render("register");
         });
+        // GET /register/token/{token}
         Route::get("/token/{token}", [UserController::class, "verifyEmail"])->name("register.token");
     });
 });
