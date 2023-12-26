@@ -39,6 +39,15 @@ class UserPostModel extends Model
         return $query;
     }
 
+    public function scopeRowLimit($query, ?int $limit)
+    {
+        if (!is_null($limit)) {
+            $query->limit($limit);
+        }
+        
+        return $query;
+    }
+
     public function user()
     {
         return $this->hasOne(User::class, "id", "created_user_id");

@@ -17,7 +17,7 @@ export default function Button(props) {
     const render = () => {
         const button = (
             <button className={classes} onClick={props.clickEvent ? props.clickEvent : () => {}} disabled={props.disabled}>
-                { props.text }
+                {props.children}
             </button>
         )
 

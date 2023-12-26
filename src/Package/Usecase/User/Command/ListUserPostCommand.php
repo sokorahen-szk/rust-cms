@@ -9,7 +9,8 @@ class ListUserPostCommand
     public function __construct(
         public bool $isLogin,
         public ?array $platforms,
-        public ?string $sortKey
+        public ?string $sortKey,
+        public ?int $limit
     )
     {
     }

@@ -1,13 +1,20 @@
-import React from "react";
-import Button from "../atoms/button"
+import React, {useState, useEffect} from "react";
 import Cookies from "js-cookie";
+import Button from "../atoms/button"
 
-export default function Header(props) {
+const title = "rustサイト"
+
+export default function Header() {
+    const [isLogin, setIsLogin] = useState(false);
+    useEffect( () => {
+        setIsLogin(Cookies.get("is_login"))
+    }, [])
+
     const loginButtonNav = () => {
         return (
             <div>
-                <Button text="ログイン" color="green" href="/login" px={5} py={2} mr={1} />
-                <Button text="新規登録" color="blue" href="/register" px={5} py={2} />
+                <Button color="green" href="/login" px={5} py={2} mr={1}>ログイン</Button>
+                <Button color="blue" href="/register" px={5} py={2}>新規登録</Button>
             </div>
         )
     }
@@ -29,9 +36,9 @@ export default function Header(props) {
     <header className="p-2 bg-gray-800">
         <div className="flex justify-between">
             <div className="py-2 text-lg text-white">
-                <a href="/">{ props.title }</a>
+                <a href="/">{ title }</a>
             </div>
-            {props.isLogin ? logoutButtonNav() : loginButtonNav()}
+            {isLogin ? logoutButtonNav() : loginButtonNav()}
         </div>
     </header>
     )

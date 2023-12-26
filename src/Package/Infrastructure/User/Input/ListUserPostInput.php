@@ -10,7 +10,12 @@ class ListUserPostInput
 
     public string $sortKey;
 
-    public function __construct(public bool $isLogin, public ?array $platforms, ?string $sortKey)
+    public function __construct(
+        public bool $isLogin,
+        public ?array $platforms,
+        ?string $sortKey,
+        public ?int $limit
+    )
     {
         if ($this->validateSortKey($sortKey)) {
             $this->sortKey = $sortKey;

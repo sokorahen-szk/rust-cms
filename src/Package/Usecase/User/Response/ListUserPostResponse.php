@@ -25,11 +25,13 @@ class ListUserPostResponse
                 "platform" => $userPost->platform()->value(),
                 "message" => $userPost->message(),
                 "created_at" => $userPost->createdAt()->toDateTimeLocalString(),
+                "close_at" => $userPost->closeAt() ? $userPost->closeAt()->toDateTimeLocalString() : null,
                 "user" => (object) [
                     "account_id" => $user->accountId()->value(),
                     "twitter_id" => $user->twitterId(),
                     "discord_id" => $user->discordId(),
                     "steam_id" => $user->steamId(),
+                    "avator_image" => $user->avatarImage()->value(),
                 ],
             ];
         }

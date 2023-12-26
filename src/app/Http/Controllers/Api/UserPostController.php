@@ -26,7 +26,8 @@ class UserPostController extends Controller
         $command = new ListUserPostCommand(
             $user ? true: false,
             $request->input("platforms", null),
-            $request->input("sort_key", "created_at#desc")
+            $request->input("sort_key", "created_at#desc"),
+            $request->input("limit", null)
         );
 
         return response()->json($interactor->list($command), Response::HTTP_OK);

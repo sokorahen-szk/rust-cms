@@ -27,6 +27,7 @@ class UserPostRepository implements IUserPostRepository
             ->where("is_display_logged_in_user", $input->isLogin)
             ->sort($input->sortKey)
             ->with(["user"])
+            ->rowLimit($input->limit)
             ->get();
 
         return $this->toEntities($models, UserPost::class);

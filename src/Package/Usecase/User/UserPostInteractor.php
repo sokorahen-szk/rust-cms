@@ -22,7 +22,8 @@ class UserPostInteractor implements IUserPostInteractor
         $userPosts = $this->userPostRepository->list(new ListUserPostInput(
             $command->isLogin,
             $command->platforms,
-            $command->sortKey
+            $command->sortKey,
+            $command->limit
         ));
         return new ListUserPostResponse($userPosts);
     }
