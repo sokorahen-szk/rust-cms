@@ -21,7 +21,7 @@ export default function Header() {
     const logoutButtonNav = () => {
         return (
             <div>
-                <Button text="ログアウト" color="gray" clickEvent={logout} px={5} py={2} mr={1} />
+                <Button color="gray" clickEvent={logout} px={5} py={2} mr={1}>ログアウト</Button>
             </div>
         )
     }

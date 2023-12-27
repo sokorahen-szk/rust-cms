@@ -12,6 +12,7 @@ export default function Button(props) {
         `bg-${props.color}-600`,
         {"opacity-50": props.disabled},
         !props.disabled ? `hover:bg-${props.color}-500` : "",
+        props.none ? "hidden" : "",
     ]);
 
     const render = () => {
