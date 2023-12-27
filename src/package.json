@@ -26,6 +26,7 @@
   "description": "",
   "dependencies": {
     "clsx": "^2.0.0",
+    "dayjs": "^1.11.10",
     "js-cookie": "^3.0.5",
     "validator": "^13.11.0"
   }

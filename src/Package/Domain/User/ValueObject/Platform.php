@@ -4,15 +4,15 @@ namespace Package\Domain\User\ValueObject;
 
 class Platform
 {
-    const PlatformPC = "PC";
-    const PlatformPS4 = "PS4";
-    const PlatformXbox = "Xbox";
+    const PLATFORM_PC = "PC";
+    const PLATFORM_PS4 = "PS4";
+    const PLATFORM_XBOX = "Xbox";
     public function __construct(private string $value)
     {
         $platforms = [
-            self::PlatformPC,
-            self::PlatformPS4,
-            self::PlatformXbox,
+            self::PLATFORM_PC,
+            self::PLATFORM_PS4,
+            self::PLATFORM_XBOX,
         ];
 
         if (!in_array($value, $platforms)) {

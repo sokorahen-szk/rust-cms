@@ -22,8 +22,9 @@ class ListUserPostResponse
             $this->data[] = (object) [
                 "id" => $userPost->id()->value(),
                 "platform" => $userPost->platform()->value(),
-                "platform" => $userPost->platform()->value(),
+                "category" => $userPost->category()->value(),
                 "message" => $userPost->message(),
+                "is_display_logged_in_user" => $userPost->isDisplayLoggedInUser(),
                 "created_at" => $userPost->createdAt()->toDateTimeLocalString(),
                 "close_at" => $userPost->closeAt() ? $userPost->closeAt()->toDateTimeLocalString() : null,
                 "user" => (object) [

@@ -43,6 +43,7 @@ use Package\Domain\User\ValueObject\Password;
 use Package\Domain\User\ValueObject\UserStatus;
 use Package\Domain\Shared\ValueObject\Datetime;
 use Package\Domain\User\ValueObject\AvatarImage;
+use Package\Domain\User\ValueObject\Category;
 
 trait ModelToEntityConverter
 {
@@ -134,11 +135,12 @@ trait ModelToEntityConverter
         $userPost = new UserPost(
             new UserPostId($model->id),
             new Platform($model->platform),
+            new Category($model->category),
             $model->message,
             (bool) $model->is_display_logged_in_user,
             new UserId($model->created_user_id),
             $model->close_at ? new Datetime($model->close_at) : null,
-            new Datetime($model->createdAt),
+            new Datetime($model->created_at),
         );
         $userPost->setUser($this->toUser($model->user));
 

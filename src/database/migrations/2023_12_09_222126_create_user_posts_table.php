@@ -20,6 +20,13 @@ return new class extends Migration
                 "PS4",
                 "Xbox",
             ])->comment("プラットフォーム");
+            $table->enum("category", [
+                "フレンド募集",
+                "クランメンバー募集",
+                "クランメンバー希望",
+                "レイド要員",
+                "その他",
+            ])->comment("カテゴリー");
             $table->text("message")->comment("メッセージ");
             // true = ログインユーザのみ表示する、 false = 誰でも表示する
             $table->boolean("is_display_logged_in_user")->comment("ログインユーザにのみ表示可否");

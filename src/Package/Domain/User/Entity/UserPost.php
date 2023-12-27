@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Package\Domain\User\Entity;
 use Package\Domain\Shared\BaseEntity as Entity;
 use Package\Domain\Shared\ValueObject\Datetime;
+use Package\Domain\User\ValueObject\Category;
 use Package\Domain\User\ValueObject\Platform;
 use Package\Domain\User\ValueObject\UserId;
 use Package\Domain\User\ValueObject\UserPostId;
@@ -15,6 +16,7 @@ class UserPost extends Entity
     public function __construct(
         private UserPostId $id,
         private Platform $platform,
+        private Category $category,
         private string $message,
         private bool $isDisplayLoggedInUser,
         private UserId $createdUserId,
@@ -32,6 +34,11 @@ class UserPost extends Entity
     public function platform(): Platform
     {
         return $this->platform;
+    }
+
+    public function category(): Category
+    {
+        return $this->category;
     }
 
     public function message(): string
