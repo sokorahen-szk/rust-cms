@@ -13,3 +13,6 @@ docker-destroy:
 	docker-compose  -f ./docker-compose.yml \
 		--env-file ./rust-cms-infra/.local-env down --rmi all -v \
 		&& docker volume prune --force
+
+npm-build:
+	cd ./src && npm run dev

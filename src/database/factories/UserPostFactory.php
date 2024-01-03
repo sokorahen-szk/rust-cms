@@ -26,7 +26,7 @@ class UserPostFactory extends Factory
         $categories = [
             "フレンド募集",
             "クランメンバー募集",
-            "クランメンバー希望",
+            "クランメンバー申請",
             "レイド要員",
             "その他",
         ];

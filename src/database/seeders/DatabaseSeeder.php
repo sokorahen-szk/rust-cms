@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             ClanSeeder::class,
             UserSeeder::class,
             UserPostSeeder::class,
+            TagSeeder::class,
         ]);
     }
 }

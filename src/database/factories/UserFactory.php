@@ -38,11 +38,6 @@ class UserFactory extends Factory
         ];
     }
 
-    /**
-     * Indicate that the model"s email address should be unverified.
-     *
-     * @return static
-     */
     public function unverified()
     {
         return $this->state(fn () => [
@@ -50,11 +45,6 @@ class UserFactory extends Factory
         ]);
     }
 
-    /**
-     * Indicate that the model"s email address should be unverified.
-     *
-     * @return static
-     */
     public function adminUser()
     {
         return $this->state(fn () => [
