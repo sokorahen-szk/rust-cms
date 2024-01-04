@@ -21,6 +21,7 @@ class ListTagResponse
             $this->data[] = (object) [
                 "id" => $tag->id()->value(),
                 "name" => $tag->name(),
+                "display_order" => $tag->displayOrder(),
             ];
         }
     }

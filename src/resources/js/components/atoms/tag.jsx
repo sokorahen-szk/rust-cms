@@ -3,12 +3,12 @@ import clsx from 'clsx';
 
 export default function Tag(props) {
     const classes = clsx([
-        `bg-${props.color}-100`,
-        `text-${props.color}-800`,
+        props.color && props.color.indexOf("[") === -1 ?
+        `bg-${props.color}-100 text-${props.color}-800` : `bg-${props.color} text-white`,
         "text-xs",
         "font-medium",
-        "me-2",
         `mx-${props.mx}`,
+        `ml-${props.ml}`,
         `px-${props.px}`,
         `py-${props.py}`,
         !props.block ? "inline" : "",

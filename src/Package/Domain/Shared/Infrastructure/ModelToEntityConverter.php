@@ -90,6 +90,7 @@ trait ModelToEntityConverter
         return new Tag(
             new TagId($tagModel->id),
             $tagModel->name,
+            $tagModel->display_order,
             $tagModel->description,
             (bool) $tagModel->is_enabled,
             (bool) $tagModel->is_display_on_top,

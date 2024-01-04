@@ -12,6 +12,7 @@ class Tag extends BaseEntity
     public function __construct(
         private TagId $id,
         private string $name,
+        private int $displayOrder,
         private ?string $description,
         private bool $isEnabled,
         private bool $isDisplayOnTop
@@ -26,6 +27,11 @@ class Tag extends BaseEntity
     public function name(): string
     {
         return $this->name;
+    }
+
+    public function displayOrder(): int
+    {
+        return $this->displayOrder;
     }
 
     public function description(): ?string

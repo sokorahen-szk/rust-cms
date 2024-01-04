@@ -24,7 +24,7 @@ class UserPostRepository implements IUserPostRepository
     public function list(ListUserPostInput $input): array
     {
         $models = $this->model->wherePlatforms($input->platforms)
-            ->where("is_display_logged_in_user", $input->isLogin)
+            ->whereIsDisplayLoggedInUser("is_display_logged_in_user", $input->isLogin)
             ->sort($input->sortKey)
             ->with(["user"])
             ->rowLimit($input->limit)

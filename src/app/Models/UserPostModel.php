@@ -19,6 +19,14 @@ class UserPostModel extends Model
     public $incrementing = false;
 
     public $timestamps = false;
+    public function scopeWhereIsDisplayLoggedInUser($query, bool $isDisplayLoggedInUser)
+    {
+        if (!$isDisplayLoggedInUser) {
+            return $query->whereIn((bool) $isDisplayLoggedInUser);
+        }
+
+        return $query;
+    }
 
     public function scopeWherePlatforms($query, ?array $platforms)
     {

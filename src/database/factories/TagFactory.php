@@ -22,7 +22,9 @@ class TagFactory extends Factory
     {
         return [
             "id" => (string) Str::uuid(),
-            "name" => substr(fake()->text(), 0, mt_rand(0, 10)),
+            "name" => substr(fake()->text(), 5, mt_rand(0, 15)),
+            "display_order" => mt_rand(1, 3),
+            "is_enabled" => (bool) mt_rand(0, 1),
             "is_enabled" => (bool) mt_rand(0, 1),
             "is_display_on_top" => (bool) mt_rand(0, 1),
         ];
