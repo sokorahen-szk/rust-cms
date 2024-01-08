@@ -10,4 +10,9 @@ class BaseEntity
     {
         //
     }
+
+    protected function equal(mixed $class): bool
+    {
+        return $this instanceof $class;
+    }
 }
