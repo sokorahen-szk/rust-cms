@@ -2,6 +2,9 @@ import React from "react";
 import Tag from "../atoms/tag";
 
 export default function Tags(props) {
+    const event = () => {
+        console.log("A")
+    }
     return (
         <>
             {
@@ -12,8 +15,9 @@ export default function Tags(props) {
                             color={item.color}
                             px={2}
                             py={2}
-                            ml={2}
+                            mr={2}
                             rounded
+                            clickEvent={event}
                         >{item.value}</Tag>
                     )
                 })

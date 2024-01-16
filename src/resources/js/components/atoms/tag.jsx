@@ -9,10 +9,14 @@ export default function Tag(props) {
         "font-medium",
         `mx-${props.mx}`,
         `ml-${props.ml}`,
+        `mr-${props.mr}`,
         `px-${props.px}`,
         `py-${props.py}`,
+        !props.disabled && props.clickEvent ? "cursor-pointer" : "",
+        !props.disabled && props.clickEvent ? `hover:bg-${props.color}-300`:"",
         !props.block ? "inline" : "",
-        props.rounded ? `rounded-full` : "",
+        props.rounded ? "rounded-full" : "",
+        {"opacity-50": props.disabled},
     ]);
-    return <span className={classes}>{props.children}</span>
+    return <span className={classes} onClick={props.clickEvent ? props.clickEvent : () => {}}>{props.children}</span>
 }
