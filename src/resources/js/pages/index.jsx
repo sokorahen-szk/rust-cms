@@ -24,9 +24,9 @@ export default function Index() {
                 content={
                 <div className="mt-3">
                     <div className="mb-1">悪質ユーザー</div>
-                    <Tags items={filterTags(1)} />
+                    <Tags items={filterTags(1)} changeEvent={(id) => console.log(id)}/>
                     <div className="mt-2 mb-1">一般</div>
-                    <Tags items={filterTags(2)} />
+                    <Tags items={filterTags(2)} changeEvent={(id) => console.log(id)}/>
                 </div>
                 }
                 left={
